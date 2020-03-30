@@ -1,0 +1,34 @@
+{
+  "name": "nopro_two",
+  "version": "1.0.0",
+  "description": "nopro_two",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kkmerritt/nopro_two.git"
+  },
+  "author": "Kevin Merritt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kkmerritt/nopro_two/issues"
+  },
+  "homepage": "https://github.com/kkmerritt/nopro_two#readme",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "bootstrap": "^3.3.5",
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "express-ejs-layouts": "^1.1.0",
+    "express-session": "^1.11.3",
+    "eyespect": "^0.1.10",
+    "jQuery": "^1.7.4",
+    "jquery": "^2.1.4",
+    "method-override": "^2.3.5",
+    "mongoose": "^4.1.10",
+    "morgan": "^1.6.1"
+  }
+}
