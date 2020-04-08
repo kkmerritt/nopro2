@@ -1,34 +1,42 @@
 {
-  "name": "nopro_two",
+  "name": "nopro",
   "version": "1.0.0",
-  "description": "nopro_two",
+  "description": "nopro sports management website",
   "main": "server.js",
+  "directories": {
+    "lib": "lib"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kkmerritt/nopro_two.git"
+    "url": "git+https://github.com/kkmerritt/nopro2.git"
   },
-  "author": "Kevin Merritt",
-  "license": "MIT",
+  "keywords": [
+    "nopro",
+    "sports",
+    "league",
+    "management"
+  ],
+  "author": "kev merritt",
+  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kkmerritt/nopro_two/issues"
+    "url": "https://github.com/kkmerritt/nopro2/issues"
   },
-  "homepage": "https://github.com/kkmerritt/nopro_two#readme",
+  "homepage": "https://github.com/kkmerritt/nopro2#readme",
   "dependencies": {
-    "body-parser": "^1.14.1",
-    "bootstrap": "^3.3.5",
-    "ejs": "^2.3.4",
-    "express": "^4.13.3",
-    "express-ejs-layouts": "^1.1.0",
-    "express-session": "^1.11.3",
-    "eyespect": "^0.1.10",
-    "jQuery": "^1.7.4",
-    "jquery": "^2.1.4",
-    "method-override": "^2.3.5",
-    "mongoose": "^4.1.10",
-    "morgan": "^1.6.1"
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.0.2",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.9.7",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^6.0.1"
   }
 }
