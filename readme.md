@@ -15,10 +15,12 @@ drinking: CuP on Norman Coffee, Bells Two-Hearted Ale, Sorrow.
 eating: marshmallows from swiss miss hot cocoa packets.
 
 # CREDITS:
-[Semantic UI](https://semantic-ui.com//) Bootstrap framework by: [Mark Otto] and [Jacob Thorton]
+[Semantic UI](https://semantic-ui.com//)
 
-# GIT HUB / WIREFRAME IMAGES
+# GIT HUB
 [GitHub KKMERRITT](https://github.com/kkmerritt/nopro2)
+# HEROKU
+[HEROKU](https://HEROKU.COM)
 
 # TECHNICAL CHALLENGES:
 

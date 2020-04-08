@@ -11,13 +11,13 @@ var flash = require('connect-flash');
 
 
 //LocalStrategy = require('passport-local');
-// Team = require('./models/team');
-// Player = require('./models/player');
+ Team = require('./models/team');
+ Player = require('./models/player');
 
 var teamRoutes = require('./routes/teams');
 var playerRoutes = require('./routes/players');
 server.use("/teams",teamRoutes);
-server.use("players", playerRoutes);
+server.use("/players", playerRoutes);
 
 
 //-------<[ LOCAL DEVELOPMENT DATABASE ]

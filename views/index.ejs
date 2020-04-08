@@ -12,10 +12,45 @@
 
   <iframe id='calendar' src="https://calendar.google.com/calendar/b/1/embed?height=600&amp;wkst=2&amp;bgcolor=%234285F4&amp;ctz=America%2FNew_York&amp;src=bm9wcm9zcG9ydHMub3JnXzYxMmI3NzE0dGs4cHQwNXVianViazhzbGZnQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&amp;src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%237CB342&amp;color=%237986CB&amp;showTz=0&amp;showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;title=NoPro%20Summer%20Softball%202020" style="border:solid 1px #777" frameborder="0" scrolling="no"></iframe>
 
+<div id="login">
+
+  <div class="ui middle aligned center aligned grid">
+    <div class="column">
+      <h2 class="ui blue image header">
+        <img src="assets/images/logo.png" class="image">
+        <div class="content">
+          Log-in to your account
+        </div>
+      </h2>
+      <form class="ui large form" action="/player" method="post">
+        <div class="ui stacked segment">
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="user icon"></i>
+              <input type="text" name="email" placeholder="E-mail address">
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="lock icon"></i>
+              <input type="password" name="password" placeholder="Password">
+            </div>
+          </div>
+          <div class="ui fluid large green submit button">Login</div>
+        </div>
+
+        <div class="ui error message"></div>
+
+      </form>
+
+      <div class="ui message">
+        New to us? <a href="../players/new">Sign Up</a>
+      </div>
+    </div>
+  </div>
 
 
-
-
+</div>
 
 
 

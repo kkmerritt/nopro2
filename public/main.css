@@ -14,3 +14,12 @@ line-height: 2em;
   letter-spacing: 2em;
 
 }
+
+#login {
+  margin: 50px auto;
+  width: 40%;
+}
+
+ul {
+  list-style: none;
+}

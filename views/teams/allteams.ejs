@@ -1,0 +1,15 @@
+<%- include("../partials/header") %>
+<h3>
+all the teams
+  <% teams.forEach(function(team){ %>
+<ul>
+  <li><%=team.name%></li>
+    <li><%=team.players%></li>
+</ul>
+
+
+  <% }) %>
+
+</h3>
+
+<%- include("../partials/footer") %>
