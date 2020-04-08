@@ -51,16 +51,57 @@ NOPRO SPORTS    </div>
     <a class="item">
       Schedule
     </a>
+    <div class="right menu">
+    <a class="item" href='./signup'>Sign Up</a>
+    <a class="item" id='login-btn'>Log In</a>
+  </div>
   </div>
 
 
+  <div class="ui modal">
+    <i class="close icon"></i>
+    <div class="header">Please Login</div>
+    <div class="image content">
+
+        <div class="ui middle aligned center aligned grid">
+          <div class="column">
+            <h2 class="ui blue image header">
+              <div class="content">
+                Log-in to your account
+              </div>
+            </h2>
+            <form class="ui large form" action="/player" method="post">
+              <div class="ui stacked segment">
+                <div class="field">
+                  <div class="ui left icon input">
+                    <i class="user icon"></i>
+                    <input type="text" name="email" placeholder="E-mail address">
+                  </div>
+                </div>
+                <div class="field">
+                  <div class="ui left icon input">
+                    <i class="lock icon"></i>
+                    <input type="password" name="password" placeholder="Password">
+                  </div>
+                </div>
+                <div class="ui fluid large green submit button">Login</div>
+              </div>
+
+              <div class="ui error message"></div>
+
+            </form>
+
+          </div>
+        </div>
+
+    </div>
 
 
-
-
-
-
-
+    <div class="actions">
+      <div class="ui button">Cancel</div>
+      <div class="ui button">OK</div>
+    </div>
+  </div>
 
 
 
@@ -69,11 +110,7 @@ NOPRO SPORTS    </div>
 
     <div class="ui raised padded container segment">
       <div class='title'>NOPRO SPORTS</div>
-      <ul>
-        <li>ALL TEAMS</li>
-        <li>ALL PLAYERS</li>
 
-      </ul>
       <div class="ui right floated segment navlinks">
         <span><a href="mailto:info@noprosports.org"><i class="envelope outline icon"></i></a></span>
         <span><a href="https://www.instagram.com/noprosports"><i class="instagram icon"></i></a></span>

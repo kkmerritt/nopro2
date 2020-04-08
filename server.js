@@ -37,12 +37,13 @@ server.get('/' , function(req, res){
   res.render('index.ejs');
 });
 
-server.get('/login' , function(req, res){
-  res.render('index.ejs');
+//login modal
+server.post('/' , function(req, res){
+  res.render('login.ejs');
 });
 
-server.get('/' , function(req, res){
-  res.render('index.ejs');
+server.get('/signup' , function(req, res){
+  res.render('signup.ejs');
 });
 
 
