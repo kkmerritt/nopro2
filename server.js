@@ -53,7 +53,3 @@ server.get('/signup' , function(req, res){
 server.set('port', (process.env.PORT || 3000));
 server.listen(server.get('port'),
 function(){console.log('server: running motherfuckers! port: ' + server.get('port'));});
-
-
-
-console.log('connected motherfucker!')
