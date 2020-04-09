@@ -9,6 +9,14 @@ var methodOverride = require('method-override');
 var middleware = require('./middleware');
 var flash = require('connect-flash');
 
+//REMEMBER TO DEFINE THIS SHIT BEFORE ROUTES, moron
+server.use(bodyParser.urlencoded({extended: true}));
+server.use(methodOverride('_method'));
+server.set('view engine', 'ejs');
+server.use(express.static(__dirname + "/public"))
+//app.use(flash());
+
+
 
 //LocalStrategy = require('passport-local');
  Team = require('./models/team');
@@ -27,11 +35,6 @@ mongoose.connect("mongodb://localhost:27017/noprodb",
 // mongoose.connect(process.env.DATABASEURL,{ useUnifiedTopology: true, useNewUrlParser: true});
 // app.use(bodyParser.urlencoded({extended: true}));
 
-server.use(bodyParser.urlencoded({extended: true}));
-server.use(methodOverride('_method'));
-server.set('view engine', 'ejs');
-server.use(express.static(__dirname + "/public"))
-//app.use(flash());
 
 server.get('/' , function(req, res){
   res.render('index.ejs');

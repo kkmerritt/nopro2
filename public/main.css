@@ -23,3 +23,8 @@ line-height: 2em;
 ul {
   list-style: none;
 }
+
+#calendar {
+  width: 50%;
+  height: 400px;
+}

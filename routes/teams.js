@@ -4,12 +4,6 @@ var router = express.Router();
 
 var middleware = require('../middleware');
 
-testTeam = {
-  name: "Extras",
-  players: "Ricky Dickface"
-
-}
-
 
 router.get('/' , function(req, res){
   Team.find({}, function(err, allTeams){
@@ -26,13 +20,19 @@ router.get('/new' , function(req, res){
 });
 
 router.post('/' , function(req, res){
-  Team.create(testTeam, function(err, newTeam){
+  console.log(JSON.stringify(req.body))
+  var newTeam = {
+    name: req.body.name,
+    captain: req.body.captain,
+    phone: req.body.phone
+  }
+
+  Team.create(newTeam, function(err, newTeam){
     if(err){
       console.log('new team creation error: ' + err);
     } else {
-      console.log("new team created :" + JSON.stringify(newTeam))
-
-      res.redirect("/teams/" + newTeam._id);
+      console.log("new team created and added to database :" + JSON.stringify(newTeam))
+      res.redirect("teams/" + newTeam._id);
     }
   });
 });
@@ -40,45 +40,71 @@ router.post('/' , function(req, res){
 router.get('/:id' , function(req, res){
   Team.findById(req.params.id, function(err, foundTeam){
     if(err){
-        console.log("all teams find error: " + err);
+        console.log("single team show page error: " + err);
     } else {
-       res.render("teams/teams",{teams:foundTeam});
+      var teamname = foundTeam.name
+
+      Player.find({team: teamname}, function(err, allTeamPlayers){
+        if(err){
+            console.log("single team show page error: " + err);
+        } else {
+          console.log(allTeamPlayers)
+          res.render("teams/showteam" , {team : foundTeam, players: allTeamPlayers});
+
+         }
+
+        })
     }
  });
 })
 
-
-router.get("/", function(req, res){
-    // Get all campgrounds from DB
-    Campground.find({}, function(err, allCampgrounds){
-       if(err){
-           console.log(err);
-       } else {
-          res.render("campgrounds/index",{campgrounds: allCampgrounds, page: 'campgrounds'});
-       }
-    });
-});
-
-
-
-
-
-
-
-
-
-
-
-
 router.get('/:id/edit' , function(req, res){
-  res.send('@ / team/id get route');
+  Team.findById(req.params.id, function(err, foundTeam){
+
+if(err){
+  console.log("error in the finding of a team to edit: "+err);
+} else{
+  res.render('teams/editteam.ejs', {team: foundTeam});
+}
+})
 });
 
 router.put('/:id' , function(req, res){
-  res.send('@ / team/id get route');
+  var editTeam = {
+    name: req.body.name,
+    captain: req.body.captain,
+    phone: req.body.phone
+  }
+
+Team.findByIdAndUpdate(req.params.id, editTeam, function(err, foundTeam){
+  if (err){
+    console.log("error in the updating of a team to edit: "+err);
+  }else {
+    console.log('team updated!: '+ foundTeam)
+    res.redirect('/teams/'+foundTeam.id);
+
+  }
+})
 });
 
 router.delete('/:id' , function(req, res){
-  res.send('@ / team/id get route');
+  Team.findByIdAndRemove(req.params.id, function(err){
+    if (err){console.log("error with team deletion: "+err)}
+    else{
+      res.redirect('/teams');
+    }
+  })
 });
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = router;

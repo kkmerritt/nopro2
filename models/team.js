@@ -3,7 +3,14 @@ var mongoose = require("mongoose");
 
 var teamSchema = new mongoose.Schema({
    name: String,
-   players: String,
+   captain: String,
+   phone: String,
+   players: [
+      {
+         type: mongoose.Schema.Types.ObjectId,
+         ref: "Player"
+      }
+   ]
 
   // image: String,
 

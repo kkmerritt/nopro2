@@ -1,28 +1,21 @@
 <%- include("../partials/header") %>
 
 <form class="ui form" action="/teams" method="post" >
-<div class="ui top attached label">Example
-</div>
-
+<div class="ui top attached label">Example</div>
 
   <div class="inline field">
     <label>Team Name</label>
-    <input type="text" name="team-name" placeholder="Team Name">
+    <input type="text" name="name" placeholder="Team Name">
   </div>
   <div class="inline field">
     <label>Team Captain</label>
-    <input type="text" name="captain-name" placeholder="Team Captain Name">
+    <input type="text" name="captain" placeholder="Team Captain Name">
   </div>
   <div class="inline field">
     <label>Captain Phone Number</label>
     <input type="number" name="phone" placeholder="Team Captain Phone Number">
   </div>
-  <div class="field">
-    <div class="ui checkbox">
-      <input type="checkbox" tabindex="0" class="hidden">
-      <label>I agree to the Terms and Conditions</label>
-    </div>
-  </div>
+
   <button class="ui button" type="submit">Submit</button>
 
 </form>

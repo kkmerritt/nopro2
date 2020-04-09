@@ -1,0 +1,24 @@
+<%- include("../partials/header") %>
+<a href="/teams/new">Enter a new Team</a>
+
+
+<h3>a single team</h3>
+
+<ul>
+    <li><h3>
+      <%= team.name%></h3></li>
+    <li>Captain: <%= team.captain%></li>
+
+    <li>captain phone: <%= team.phone%></li>
+<li>Players:</li>
+    <% players.forEach(function(thisPlayer){ %>
+
+      <li><%=thisPlayer.firstname%> <%=thisPlayer.lastname%><a href="../players/<%=thisPlayer.id%>">[ Bio ]</a></li>
+
+
+  <%  }) %>
+</ul>
+
+<a href="../players/new">add player</a><br><br>
+<a href="../teams/<%=team.id%>/edit">edit this team</a>
+<%- include("../partials/footer") %>

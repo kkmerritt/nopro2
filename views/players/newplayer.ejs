@@ -1,1 +1,37 @@
-new player~!
+<%- include("../partials/header") %>
+<br>
+<br>
+<form class="ui form" action="/players" method="post" >
+
+  <div class="inline field">
+    <label>Player First Name</label>
+    <input type="text" name="firstname" placeholder="First Name">
+  </div>
+  <div class="inline field">
+    <label>Player Last Name</label>
+    <input type="text" name="lastname" placeholder="Last Name">
+  </div>
+
+  <div class="inline field">
+      <label>Teams</label>
+      <select class="ui search dropdown" name='team'>
+        <option value="">Free Agent</option>
+
+        <% teams.forEach(function(team){ %>
+
+          <option name="<%=team.name%>" value="<%= team.name %>"><%= team.name %></option>
+
+        <% }) %>
+
+
+      </select>
+    </div>
+
+  <button class="ui button" type="submit">Submit</button>
+
+
+</form>
+
+
+
+<%- include("../partials/footer") %>
