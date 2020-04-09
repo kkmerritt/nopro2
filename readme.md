@@ -16,6 +16,8 @@ eating: marshmallows from swiss miss hot cocoa packets.
 
 # CREDITS:
 [Semantic UI](https://semantic-ui.com//)
+[ya-webdesign](https://ya-webdesign.com/) 
+[fontawesome](https://fontawesome.com/)
 
 # GIT HUB
 [GitHub KKMERRITT](https://github.com/kkmerritt/nopro2)

@@ -2,122 +2,44 @@
 <html lang="en">
 <head>
 
-  <!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
   <title>NoPro Sports</title>
   <meta name="description" content="">
   <meta name="nopro-sports.org" content="">
 
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
   <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
 
 
-  <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="/main.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"> -->
   <script src="https://kit.fontawesome.com/4226c8fe0b.js" crossorigin="anonymous"></script>
 
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="icon" type="image/png" href="img/np_favicon.ico">
 
 </head>
-
 <body>
 
+  <div id="navbar">
 
+    <div class="sociallinks">
 
+      <a title="Login Here" href='./login'><i class="fas fa-user"></i></a>
+      <a title="Signup Here" href='./signup'><i class="fas fa-sign-in-alt"></i></a>
+      <a title="Mailto:"href="mailto:info@noprosports.org"><i class="fas fa-envelope"></i></a>
 
+      <a title="Instagram" href="https://www.instagram.com/noprosports"><i class="fab fa-instagram-square"></i></a>
+      <a title="Facebook" href="https://www.facebook.com/noprosports"><i class="fab fa-facebook"></i></a>
+      <a title="Twitter" href="https://twitter.com/noprosports/"><i class="fab fa-twitter-square"></i></a>
 
-
-
-
-  <div class="ui menu">
-    <div class="header item">
-
-
-<a href="/">NOPRO SPORTS</a></div>
-    <a class="item" href="/teams">
-      Teams
-    </a>
-    <a class="item">
-      Players
-    </a>
-    <a class="item">
-      Calendar
-    </a>
-    <div class="right menu">
-    <a class="item" href='./signup'>Sign Up</a>
-    <a class="item" id='login-btn'>Log In</a>
-  </div>
-  </div>
-
-
-  <div class="ui modal">
-    <i class="close icon"></i>
-    <div class="header">Please Login</div>
-    <div class="image content">
-
-        <div class="ui middle aligned center aligned grid">
-          <div class="column">
-            <h2 class="ui blue image header">
-              <div class="content">
-                Log-in to your account
-              </div>
-            </h2>
-            <form class="ui large form" action="/player" method="post">
-              <div class="ui stacked segment">
-                <div class="field">
-                  <div class="ui left icon input">
-                    <i class="user icon"></i>
-                    <input type="text" name="email" placeholder="E-mail address">
-                  </div>
-                </div>
-                <div class="field">
-                  <div class="ui left icon input">
-                    <i class="lock icon"></i>
-                    <input type="password" name="password" placeholder="Password">
-                  </div>
-                </div>
-                <div class="ui fluid large green submit button">Login</div>
-              </div>
-
-              <div class="ui error message"></div>
-
-            </form>
-
-          </div>
-        </div>
 
     </div>
 
 
-    <div class="actions">
-      <div class="ui button">Cancel</div>
-      <div class="ui button">OK</div>
-    </div>
-  </div>
+  </div><!-- end of nabvar -->
 
+  <div class="container"><!-- main content container -->
 
-
-
-  <div class="ui container"> <!-- ends in footer.ejs -->
-
-    <div class="ui raised padded container segment">
-      <div class='title'>NOPRO SPORTS</div>
-
-      <div class="ui right floated segment navlinks">
-        <span><a href="mailto:info@noprosports.org"><i class="envelope outline icon"></i></a></span>
-        <span><a href="https://www.instagram.com/noprosports"><i class="instagram icon"></i></a></span>
-        <span><a href="https://www.facebook.com/noprosports"><i class="facebook icon"></i></a></span>
-        <span><a href="https://twitter.com/noprosports/"><i class="twitter icon"></i></a></span>
-      </div>
-
-    </div>
+    <div id="logo"><img src="/img/nopro_logo.gif" alt=""></div>
