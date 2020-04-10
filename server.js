@@ -16,11 +16,32 @@ server.set('view engine', 'ejs');
 server.use(express.static(__dirname + "/public"))
 //app.use(flash());
 
+LocalStrategy = require('passport-local');
+Team = require('./models/team');
+Player = require('./models/player');
 
 
-//LocalStrategy = require('passport-local');
- Team = require('./models/team');
- Player = require('./models/player');
+//passport config
+server.use(session({
+  secret:'jaxidingo',
+  resave: false,
+  saveUninitialized: false
+}))
+
+server.use(passport.initialize());
+server.use(passport.session());
+passport.use(new LocalStrategy(Player.authenticate()));
+passport.serializeUser(Player.serializeUser());
+passport.deserializeUser(Player.deserializeUser());
+
+
+server.use(function(req, res, next){
+   res.locals.currentUser = req.user;
+    // console.log('res.locals.currentUser: '+res.locals.currentUser)
+    // console.log('req.user: '+req.user)
+   next();
+});
+
 
 var teamRoutes = require('./routes/teams');
 var playerRoutes = require('./routes/players');
@@ -36,18 +57,70 @@ mongoose.connect("mongodb://localhost:27017/noprodb",
 // app.use(bodyParser.urlencoded({extended: true}));
 
 
+//display the basic home page no login required
 server.get('/' , function(req, res){
   res.render('index.ejs');
 });
 
-//login modal
-server.post('/' , function(req, res){
-  res.render('login.ejs');
+
+server.post('/login',
+passport.authenticate('local',
+ { //this is being "used" in passport.use()
+  successRedirect: '/',
+  failureRedirect: '/signup'
+}),
+  function(req, res){
+  // res.render('index.ejs'); //redirect back to '/' now logged in.
 });
 
-server.get('/signup' , function(req, res){
-  res.render('signup.ejs');
+
+server.post('/register' , function(req, res){
+  console.log('player creation route [root] accessed: req.body:'+JSON.stringify(req.body));
+  if (req.body.admincode === "admin") {req.body.isAdmin = true;}
+  if (req.body.captaincode === "cap") {req.body.isCaptain = true;}
+  if (req.body.gender === 'male') {req.body.avatar = 'https://i.imgur.com/lgMFKR7.png';}
+  var newPlayer = {
+    username: req.body.username, //using the var 'email'
+    password: req.body.password,
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    gender: req.body.gender,
+    team: req.body.team,
+    isAdmin: req.body.isAdmin,
+    isCaptain: req.body.isCaptain
+  }
+  console.log(JSON.stringify(newPlayer));
+
+  Player.register(newPlayer, req.body.password, function(err, newPlayer){
+    if(err){
+      console.log('new player root creation error: ' + err);
+      res.render('index.ejs')
+    } else {
+      passport.authenticate('local')(req, res, function(){
+        console.log("new player created and registered (logged in) and added to database :" + JSON.stringify(newPlayer))
+        res.redirect("/");
+      })
+    }
+  })
 });
+
+
+
+server.get('/signup' , function(req, res){
+    Team.find({}, function(err, allTeams){
+      if(err){
+          console.log("all teams find error at root: " + err);
+      } else {
+        res.render('signup.ejs',{teams : allTeams} );
+      }
+  });
+  })
+
+  //this should work,.maybe?
+  server.get('/logout', function (req, res) {
+    req.logout();
+    res.redirect('/')
+  });
 
 
 server.set('port', (process.env.PORT || 3000));

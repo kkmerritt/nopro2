@@ -1,1 +1,62 @@
-signup form
+<%- include("./partials/header") %>
+<br>
+<br>
+<form class="ui form" action="/register" method="post" >
+  <div class="inline field">
+    <label>Player Email</label>
+    <input type="text" name="username" placeholder="Email">
+  </div>
+  <div class="inline field">
+    <label>Player Password</label>
+    <input type="text" name="password" placeholder="password">
+  </div>
+  <div class="inline field">
+    <label>Player First Name</label>
+    <input type="text" name="firstname" placeholder="First Name">
+  </div>
+
+  <div class="inline field">
+    <label>Player Last Name</label>
+    <input type="text" name="lastname" placeholder="Last Name">
+  </div>
+  <div class="inline field">
+    <label>Player Gender</label>
+    <input type="text" name="gender" placeholder="Gender">
+  </div>
+  <div class="inline field">
+    <label>Player Image</label>
+    <input type="text" name="avatar" placeholder="Enter img url">
+  </div>
+  <div class="inline field">
+    <label>Is this an Captain Profile?</label>
+    <input type="text" name="captaincode" placeholder="False">
+  </div>
+  <div class="inline field">
+    <label>Is this an Admin Profile?</label>
+    <input type="text" name="admincode" placeholder="False">
+  </div>
+
+
+  <div class="inline field">
+      <label>Teams</label>
+      <select class="ui search dropdown" name='team'>
+        <option value="">Free Agent</option>
+
+        <% teams.forEach(function(team){ %>
+
+          <option name="<%=team.name%>"><%= team.name %></option>
+
+        <% }) %>
+
+
+      </select>
+    </div>
+
+  <button class="ui button" type="submit">Submit</button>
+
+
+</form>
+
+
+
+<%- include("./partials/footer") %>

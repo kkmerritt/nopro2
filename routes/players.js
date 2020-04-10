@@ -23,18 +23,25 @@ router.get('/new' , function(req, res){
     if(err){
         console.log("all teams find error: " + err);
     } else {
-      res.render('players/newplayer.ejs',{teams : allTeams} );
+      // just use the signup on the / root
+      // res.render('players/newplayer.ejs',{teams : allTeams} );
+      res.send('fix this to go to the signup screen')
     }
 });
 });
 
 //player post creation
 router.post('/' , function(req, res){
-  console.log('player creation route accessed: req.body:'+JSON.stringify(req.body));
+  console.log('player creation route [player] accessed: req.body:'+JSON.stringify(req.body));
+  if (req.body.admincode === "admin") {req.body.isAdmin = true;}
+  if (req.body.captaincode === "cap") {req.body.isCaptain = true;}
+
   var newPlayer = {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
-    team: req.body.team
+    team: req.body.team,
+    isAdmin: req.body.isAdmin,
+    isCaptain: req.body.isCaptain
   }
 Player.create(newPlayer, function(err, newPlayer){
   if(err){

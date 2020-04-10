@@ -1,6 +1,16 @@
 <%- include("./partials/header") %>
 
+<h3>all the teams</h3>
 
+<h4>
+<% if(currentUser){ %>
+current user:
+<%= currentUser %>
+<img src="<%=currentUser.avatar%>" height="50" width="50">
+<% } else { %>
+  No Current User Logged in.
+<%}%>
+</h4>
 
 <div class="news"><!-- begin news -->
   <h1>-- [NEWS] --</h1>
