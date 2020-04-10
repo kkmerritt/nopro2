@@ -62,7 +62,7 @@ router.get('/:id/edit' , function(req, res){
   Team.findById(req.params.id, function(err, foundTeam){
 
 if(err){
-  console.log("error in the finding of a team to edit: "+err);
+  console.log("error in the finding of a team to edit: " + err);
 } else{
   res.render('teams/editteam.ejs', {team: foundTeam});
 }

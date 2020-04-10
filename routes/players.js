@@ -2,10 +2,20 @@ var express = require('express');
 var router = express.Router();
 var middleware = require('../middleware');
 
-//player index
-// router.get('/' , function(req, res){
-//   res.render('players/showplayer.ejs');
-// });
+
+
+
+
+//player directory
+router.get('/' , function(req, res){
+  Player.find({}, function(err, allPlayers){
+    if(err){
+        console.log("all teams find error: " + err);
+    } else {
+       res.render('players/allplayers.ejs',{players : allPlayers});
+    }
+ });
+});
 
 //player new form
 router.get('/new' , function(req, res){
@@ -38,22 +48,59 @@ Player.create(newPlayer, function(err, newPlayer){
 
 //player show
 router.get('/:id' , function(req, res){
-  res.send('@ / player/id show get route');
-});
+    Player.findById(req.params.id, function(err, foundPlayer){
+      if(err){console.log("find one player error in showplayer rt: " + err);
+      } else {
+        res.render('players/showplayer.ejs',{player : foundPlayer});
+      }
+    });
+})
 
 //play edit form
 router.get('/:id/edit' , function(req, res){
-  res.send('@ / player/id/edit form route');
+  Player.findById(req.params.id, function(err, foundPlayer){
+    if(err){console.log("single player find error in the editplayer rt: " + err);
+    } else {
+      Team.find({}, function(err, allTeams){
+        if(err){console.log("allteams find error in the editplayer rt: " + err);
+        } else {
+          res.render('players/editplayer.ejs',{teams : allTeams, player : foundPlayer});
+        }
+      })
+      }
+  });
+})
+
+
+//player edit post to db
+router.put('/:id' , function(req, res){
+  console.log('accessed the edit player PUT route');
+  var editPlayer = {
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    team: req.body.team
+  }
+  Player.findByIdAndUpdate(req.params.id, editPlayer, function(err, foundPlayer){
+    if (err){
+      console.log("error in the edit single player rt: " + err);
+    }else {
+      console.log('player updated!: '+ foundPlayer)
+      res.redirect('/players/'+foundPlayer.id);
+    }
+  })
 });
 
-//play update information form
-router.put('/:id/edit' , function(req, res){
-  res.send('@ / player/id/edit PUT route');
-});
+
 
 //play deletion
 router.delete('/:id' , function(req, res){
-  res.send('@ / player delete page');
+  Player.findByIdAndRemove(req.params.id, function(err){
+    if (err){console.log("error with a player deletion: "+err)}
+    else{
+      res.redirect('/players');
+    }
+  })
 });
+
 
 module.exports = router;
