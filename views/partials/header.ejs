@@ -14,6 +14,8 @@
 
 
   <link rel="stylesheet" href="/main.css">
+  <link rel="stylesheet" href="/modal.css">
+
   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"> -->
   <script src="https://kit.fontawesome.com/4226c8fe0b.js" crossorigin="anonymous"></script>
 
@@ -23,22 +25,47 @@
 <body>
 
   <div id="navbar">
-
-    <div class="sociallinks">
-
-      <a title="Login Here" href='./login'><i class="fas fa-user"></i></a>
+    <a title="Home" href="/"><i class="fas fa-home"></i></a>
+    <a title="Login Here"><i class="fas fa-user" id="myBtn"></i></a>
       <a title="Signup Here" href='./signup'><i class="fas fa-sign-in-alt"></i></a>
-      <a title="Mailto:"href="mailto:info@noprosports.org"><i class="fas fa-envelope"></i></a>
 
       <a title="Instagram" href="https://www.instagram.com/noprosports"><i class="fab fa-instagram-square"></i></a>
       <a title="Facebook" href="https://www.facebook.com/noprosports"><i class="fab fa-facebook"></i></a>
       <a title="Twitter" href="https://twitter.com/noprosports/"><i class="fab fa-twitter-square"></i></a>
+      <a title="Mailto:"href="mailto:info@noprosports.org"><i class="fas fa-envelope"></i></a>
 
+<a href="/teams">teams<br></a>
+<a href="/players">players<br></a>
 
-    </div>
 
 
   </div><!-- end of nabvar -->
+
+
+<!-- login modal -->
+
+  <!-- Trigger/Open The Modal -->
+  <!-- <button id="myBtn">Modal Open</button> -->
+
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close"><i class="fas fa-window-close"></i></span>
+      <p>Please login to continue...</p>
+      <label for="email">email</label>
+      <input type="text">
+      <label for="email">password</label>
+      <input type="text">
+        <a href="./login" title="Login Here"><i class="fas fa-arrow-circle-right" id="myBtn"></i></a>
+    </div>
+
+  </div>
+<!-- end of modal -->
+
+
+
 
   <div class="container"><!-- main content container -->
 
