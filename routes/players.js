@@ -17,18 +17,18 @@ router.get('/' , function(req, res){
  });
 });
 
-//player new form
-router.get('/new' , function(req, res){
-  Team.find({}, function(err, allTeams){
-    if(err){
-        console.log("all teams find error: " + err);
-    } else {
-      // just use the signup on the / root
-      // res.render('players/newplayer.ejs',{teams : allTeams} );
-      res.send('fix this to go to the signup screen')
-    }
-});
-});
+//player new form DELETE THIS DELETE THIS
+// router.get('/new' , function(req, res){
+//   Team.find({}, function(err, allTeams){
+//     if(err){
+//         console.log("new player form render error: " + err);
+//     } else {
+//       // just use the signup on the / root
+//       // res.render('players/newplayer.ejs',{teams : allTeams} );
+//       res.send('fix this to go to the signup screen')
+//     }
+// });
+// });
 
 //player post creation
 router.post('/' , function(req, res){
@@ -37,6 +37,7 @@ router.post('/' , function(req, res){
   if (req.body.captaincode === "cap") {req.body.isCaptain = true;}
 
   var newPlayer = {
+    username: req.body.username,
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     team: req.body.team,
@@ -45,7 +46,9 @@ router.post('/' , function(req, res){
   }
 Player.create(newPlayer, function(err, newPlayer){
   if(err){
+    req.flash("error", err.message);
     console.log('new player creation error: ' + err);
+    res.redirect("/signup");
   } else {
     console.log("new player created and added to database :" + JSON.stringify(newPlayer))
     res.redirect("back");

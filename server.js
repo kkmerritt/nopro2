@@ -7,14 +7,14 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var methodOverride = require('method-override');
 var middleware = require('./middleware');
-var flash = require('connect-flash');
+var flash = require('connect-flash'); //express session sets up a lot of this already
 
 //REMEMBER TO DEFINE THIS SHIT BEFORE ROUTES, moron
 server.use(bodyParser.urlencoded({extended: true}));
 server.use(methodOverride('_method'));
 server.set('view engine', 'ejs');
 server.use(express.static(__dirname + "/public"))
-//app.use(flash());
+server.use(flash());
 
 LocalStrategy = require('passport-local');
 Team = require('./models/team');
@@ -39,6 +39,8 @@ server.use(function(req, res, next){
    res.locals.currentUser = req.user;
     // console.log('res.locals.currentUser: '+res.locals.currentUser)
     // console.log('req.user: '+req.user)
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash('success');
    next();
 });
 
@@ -75,29 +77,32 @@ passport.authenticate('local',
 
 
 server.post('/register' , function(req, res){
-  console.log('player creation route [root] accessed: req.body:'+JSON.stringify(req.body));
+  console.log('player creation info about to be entered: req.body:'+JSON.stringify(req.body));
   if (req.body.admincode === "admin") {req.body.isAdmin = true;}
   if (req.body.captaincode === "cap") {req.body.isCaptain = true;}
-  if (req.body.gender === 'male') {req.body.avatar = 'https://i.imgur.com/lgMFKR7.png';}
+  if (req.body.gender === "Male") {req.body.image = 'https://i.imgur.com/lgMFKR7.png';}
+
   var newPlayer = {
     username: req.body.username, //using the var 'email'
     password: req.body.password,
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     gender: req.body.gender,
+    image: req.body.image,
     team: req.body.team,
     isAdmin: req.body.isAdmin,
     isCaptain: req.body.isCaptain
   }
-  console.log(JSON.stringify(newPlayer));
 
   Player.register(newPlayer, req.body.password, function(err, newPlayer){
     if(err){
       console.log('new player root creation error: ' + err);
-      res.render('index.ejs')
+      req.flash("error", err.message);
+      res.redirect('/signup')
     } else {
       passport.authenticate('local')(req, res, function(){
-        console.log("new player created and registered (logged in) and added to database :" + JSON.stringify(newPlayer))
+        console.log("new player registered (logged in) and + database :" + JSON.stringify(newPlayer))
+        req.flash("success", "New Player has been Created! Woot motherfuckin, WOOT");
         res.redirect("/");
       })
     }
@@ -109,7 +114,7 @@ server.post('/register' , function(req, res){
 server.get('/signup' , function(req, res){
     Team.find({}, function(err, allTeams){
       if(err){
-          console.log("all teams find error at root: " + err);
+          console.log("all teams find error at signup route: " + err);
       } else {
         res.render('signup.ejs',{teams : allTeams} );
       }

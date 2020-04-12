@@ -42,12 +42,6 @@
   </div><!-- end of nabvar -->
 
 
-<!-- login modal -->
-
-  <!-- Trigger/Open The Modal -->
-  <!-- <button id="myBtn">Modal Open</button> -->
-
-  <!-- The Modal -->
   <div id="myModal" class="modal">
 <form action="/login" method="post">
 
@@ -67,8 +61,18 @@
 <!-- end of modal -->
 
 
-
-
   <div class="container"><!-- main content container -->
 
     <div id="logo"><img src="/img/nopro_logo.gif" alt=""></div>
+
+  <!-- flash error container -->
+    <div class="container">
+  <% if(error && error.length>0){ %>
+    <div class="alert alert-danger" role="alert"><%= error %></div>
+    <% } %>
+
+    <% if(success && success.length>0){ %>
+      <div class="alert alert-success" role="alert"><%= success %></div>
+      <% } %>
+    </div>
+    <!-- end flash error container -->

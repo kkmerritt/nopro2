@@ -1,110 +1,105 @@
 var express = require('express');
 var router = express.Router();
+var middleware = require('../middleware');
 //var Teams = require('../models/teams');
 
-var middleware = require('../middleware');
 
-
-router.get('/' , function(req, res){
+//------[show all teams]
+router.get('/' ,
+function(req, res){
   Team.find({}, function(err, allTeams){
-    if(err){
-        console.log("all teams find error: " + err);
-    } else {
-       res.render("teams/allteams",{teams : allTeams});
+    if(err){console.log("all teams find error: " + err);}
+      else {
+      res.render("teams/allteams",{teams : allTeams});
     }
- });
+  });
 });
 
-router.get('/new' , function(req, res){
-  res.render('teams/newteam.ejs')
+//------[show new team form]
+router.get('/new' ,
+function(req, res){
+  Player.find({isCaptain: true}, function(err, capFind){
+    if (err){ console.log('captain find error: ' + err);}
+    else {
+    res.render('teams/newteam.ejs', {captain: capFind});
+  }
+});
 });
 
-router.post('/' , function(req, res){
-  console.log(JSON.stringify(req.body))
+//------[create a new team]
+router.post('/' ,
+function(req, res){
+  console.log('on post route: here is req.body: ' + JSON.stringify(req.body))
   var newTeam = {
     name: req.body.name,
     captain: req.body.captain,
-    phone: req.body.phone
+    image: req.body.image
   }
-
-  Team.create(newTeam, function(err, newTeam){
-    if(err){
-      console.log('new team creation error: ' + err);
-    } else {
+  Team.create(newTeam,
+    function(err, newTeam){
+    if(err){console.log('new team creation error: ' + err);}
+    else {
       console.log("new team created and added to database :" + JSON.stringify(newTeam))
       res.redirect("teams/" + newTeam._id);
     }
   });
 });
 
-router.get('/:id' , function(req, res){
+//------[show 1 teams]
+router.get('/:id' ,
+function(req, res){
   Team.findById(req.params.id, function(err, foundTeam){
-    if(err){
-        console.log("single team show page error: " + err);
-    } else {
-      var teamname = foundTeam.name
-
-      Player.find({team: teamname}, function(err, allTeamPlayers){
-        if(err){
-            console.log("single team show page error: " + err);
-        } else {
+    if(err){console.log("single team show page error: " + err);}
+    else {
+      Player.find({team: foundTeam.name},
+        function(err, allTeamPlayers){
+        if(err){console.log("single team show page error: " + err);}
+        else {
           console.log(allTeamPlayers)
           res.render("teams/showteam" , {team : foundTeam, players: allTeamPlayers});
-
-         }
-
-        })
+        }
+      })
     }
- });
-})
-
-router.get('/:id/edit' , function(req, res){
-  Team.findById(req.params.id, function(err, foundTeam){
-
-if(err){
-  console.log("error in the finding of a team to edit: " + err);
-} else{
-  res.render('teams/editteam.ejs', {team: foundTeam});
-}
-})
+  });
 });
 
-router.put('/:id' , function(req, res){
+//------[show 1 team edit form]
+router.get('/:id/edit',
+function(req, res){
+  Team.findById(req.params.id,
+    function(err, foundTeam){
+    if(err){console.log("error in the finding of a team to edit: " + err);}
+    else {res.render('teams/editteam.ejs', {team: foundTeam});}
+  });
+});
+
+//------[edit 1 team]
+router.put('/:id',
+function(req, res){
   var editTeam = {
     name: req.body.name,
     captain: req.body.captain,
-    phone: req.body.phone
-  }
-
-Team.findByIdAndUpdate(req.params.id, editTeam, function(err, foundTeam){
-  if (err){
-    console.log("error in the updating of a team to edit: "+err);
-  }else {
-    console.log('team updated!: '+ foundTeam)
-    res.redirect('/teams/'+foundTeam.id);
-
-  }
-})
-});
-
-router.delete('/:id' , function(req, res){
-  Team.findByIdAndRemove(req.params.id, function(err){
-    if (err){console.log("error with team deletion: "+err)}
-    else{
-      res.redirect('/teams');
+    phone: req.body.phone}
+  Team.findByIdAndUpdate(req.params.id, editTeam,
+    function(err, foundTeam){
+    if (err){console.log("error in the updating of a team to edit: "+err);}
+    else {
+      console.log('team updated!: '+ foundTeam)
+      res.redirect('/teams/'+foundTeam.id);
     }
   })
 });
 
-
-
-
-
-
-
-
-
-
-
+//------[delete 1 team]
+router.delete('/:id',
+function(req, res){
+  Team.findByIdAndRemove(req.params.id,
+    function(err){
+    if (err){console.log("error with team deletion: "+err);}
+    else{
+      res.redirect('/teams');
+    }
+  });
+});
 
 module.exports = router;

@@ -2,14 +2,27 @@
 
 <form class="ui form" action="/players/<%=player.id%>?_method=PUT" method="post" >
 
-  <div class="inline field">
+  <div class="">
     <label>Player First Name</label>
     <input type="text" name="firstname" value="<%=player.firstname%>">
   </div>
-  <div class="inline field">
+  <div class="">
     <label>Player Last Name</label>
     <input type="text" name="lastname" value="<%=player.lastname%>">
   </div>
+  <div class="">
+    <label>Player Image</label>
+    <input type="text" name="image" value="<%=player.image %>">
+  </div>
+  <div class="">
+      <label>Gender</label>
+      <select class="" name='gender'>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+    </div>
+
+
 
   <div class="inline field">
       <label>Teams</label>

@@ -2,22 +2,22 @@
 
 
 <h3>a single team</h3>
+<h3> <%= team %></h3>
 
 <ul>
-    <li><h3>
-      <%= team.name%></h3></li>
-    <li>Captain: <%= team.captain%></li>
+  <li><%= team.name %></li>
+  <li>Captain: <%= team.captain %></li>
 
-    <li>captain phone: <%= team.phone%></li>
-<li>Players:</li>
-    <% players.forEach(function(thisPlayer){ %>
+<img src="<%= team.image %>" width="150px" alt="">
 
-      <li><%=thisPlayer.firstname%> <%=thisPlayer.lastname%><a href="../players/<%=thisPlayer.id%>">[ Bio ]</a></li>
-
-
+  <li>Image: <%= team.image %></li>
+  <li>captain phone: <%= team.phone%></li>
+  <li>Players:</li>
+  <% players.forEach(function(thisPlayer){ %>
+  <li><%=thisPlayer.firstname%> <%=thisPlayer.lastname%><a href="../players/<%=thisPlayer.id%>">[ Bio ]</a></li>
   <%  }) %>
 </ul>
 
-<a href="../players/new">add player</a><br><br>
-<a href="../teams/<%=team.id%>/edit">edit this team</a>
-<%- include("../partials/footer") %>
+    <a href="/signup">add player</a><br><br>
+    <a href="../teams/<%=team.id%>/edit">edit this team</a>
+    <%- include("../partials/footer") %>
