@@ -81,19 +81,25 @@ router.get('/:id/edit' , function(req, res){
   });
 })
 
-
 //player edit post to db
 router.put('/:id' , function(req, res){
-  console.log('accessed the edit player PUT route');
+  console.log('edit player route: this is the update info:');
+  console.log(JSON.stringify(req.body))
+  if (req.body.captaincode === "cap") {req.body.isCaptain = true;}
+  if (req.body.admincode === "admin") {req.body.isAdmin = true;}
+
   var editPlayer = {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
-    team: req.body.team
+    gender: req.body.gender,
+    image: req.body.image,
+    team: req.body.team,
+    isCaptain: req.body.isCaptain
   }
-  Player.findByIdAndUpdate(req.params.id, editPlayer, function(err, foundPlayer){
-    if (err){
-      console.log("error in the edit single player rt: " + err);
-    }else {
+  Player.findByIdAndUpdate(req.params.id, editPlayer,
+  function(err, foundPlayer){
+    if (err){console.log("error in the edit single player rt: " + err);}
+    else {
       console.log('player updated!: '+ foundPlayer)
       res.redirect('/players/'+foundPlayer.id);
     }

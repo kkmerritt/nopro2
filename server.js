@@ -83,8 +83,7 @@ server.post('/register' , function(req, res){
   if (req.body.gender === "Male") {req.body.image = 'https://i.imgur.com/lgMFKR7.png';}
 
   var newPlayer = {
-    username: req.body.username, //using the var 'email'
-    password: req.body.password,
+    username: req.body.username, //user enters 'email'
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     gender: req.body.gender,
@@ -109,8 +108,6 @@ server.post('/register' , function(req, res){
   })
 });
 
-
-
 server.get('/signup' , function(req, res){
     Team.find({}, function(err, allTeams){
       if(err){
@@ -121,7 +118,6 @@ server.get('/signup' , function(req, res){
   });
   })
 
-  //this should work,.maybe?
   server.get('/logout', function (req, res) {
     req.logout();
     res.redirect('/')

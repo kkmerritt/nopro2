@@ -1,30 +1,17 @@
 <%- include("../partials/header") %>
-<h3>all the teams</h3>
-<h1>
-current user:
-  <%= currentUser %>
+<h5>current user:<%= currentUser %></h5>
 
-</h1>
-
-<h3>all the players</h3>
-
-
+<h3>Player Directory</h3>
 
 <% players.forEach(function(player){ %>
 <ul>
-
-  <a href="players/<%=player.id%>">
-    <li><strong><%=player.firstname%></strong></li>
-  </a>
-  <a href="players/<%=player.id%>">
-    <li><strong><%=player.lastname%></strong></li>
-  </a>
-
-  <li><%=player.team%> contact info</li>
-  <a href="../players/<%=player.id%>/edit">edit this player</a>
-</ul><br>
-
-  <% }) %>
-
-  <a href="../signup">add player</a><br><br>
+  <li>
+  <a href="players/<%=player.id%>"><%=player.firstname%> <strong><%=player.lastname%> </strong>
+  </a><%=player.team%>
+  <a href="../players/<%=player.id%>/edit"> [edit] </a></li>
+</ul>
+<% }) %>
+<p> ----------  </p>
+<a href="../signup">add player</a>
+<p> ----------  </p>
 <%- include("../partials/footer") %>

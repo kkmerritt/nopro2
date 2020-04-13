@@ -2,22 +2,15 @@
 
 
 <h3>one player</h3>
+<h5><%=player%></h5>
+<img src="<%=player.image%>" width= "100px">
+    <li>
+      <a href="players/<%=player.id%>">
+      <strong><%=player.firstname%> <%=player.lastname%></strong></a>
+    </li>
 
-
-
-
-
-  <a href="players/<%=player.id%>">
-    <li><strong><%=player.firstname%></strong></li>
-  </a>
-  <a href="players/<%=player.id%>">
-    <li><strong><%=player.lastname%></strong></li>
-  </a>
-
-  <li><%=player.team%> contact info</li>
-  <a href="../players/<%=player.id%>/edit">edit this player</a>
-
-
-
+  <li>TEAM:<%=player.team%></li>
+  <a href="../players/<%=player.id%>/edit">[edit]</a>
+<br><br>
   <a href="../players/new">add player</a><br><br>
 <%- include("../partials/footer") %>

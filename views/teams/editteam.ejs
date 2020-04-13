@@ -3,60 +3,49 @@
 <form class="ui form" action="/teams/<%=team.id%>?_method=PUT" method="post" >
 <div class="ui top attached label">Example</div>
 
-  <div class="inline field">
-    <label>Team Name</label>
-    <input type="text" name="name" value="<%=team.name%>">
-  </div>
-  <div class="inline field">
-    <label>Team Captain</label>
-    <input type="text" name="captain" value="<%=team.captain%>">
-  </div>
-  <div class="inline field">
-    <label>Team Image</label>
-    <input type="text" name="captain" value="<%=team.image%>">
-  </div>
+<div class="inline field">
+<label>Team Name</label>
+<input type="text" name="name" value="<%=team.name%>">
+</div>
 
-  <button class="ui button" type="submit">Submit</button>
+<select name="captain">
+<% players.forEach(function(eachCaptain){%>
+<option value="<%=eachCaptain.firstname%>"><%=eachCaptain.firstname%></option>
+<%})%>
+</select>
+
+
+<div class="inline field">
+<label>Team Image</label>
+<input type="text" name="image" value="<%=team.image%>">
+</div>
+
+<button class="ui button" type="submit">Submit</button>
 
 </form>
-
+<!-- player listing for this team -->
+<% players.forEach(function(teamPlayers){%>
+<h5>"<%=teamPlayers.firstname%> <%=teamPlayers.lastname%>"</h5>
+<%})%>
 
 <br>
-<button class="ui red button" id="delete-btn">Delete</button>
-<form action="/teams/<%=team.id%>?_method=DELETE" method="post"></form>
+<button class="" id="delBtn">Delete this Team</button>
 
 
-
+<!-- start of modal -->
+<div id="myModal" class="modal">
+<form action="/teams/<%=team.id%>?_method=DELETE" method="post">
+<div class="modal-content">
+<span class="close"><i class="fas fa-window-close"></i></span>
+<p>Are you fucking sure?</p>
+<label for="yes">yes</label>
+<button type="submit" name="button"></button>
+<label for="no">no</label>
+<button type="submit" name="button"></button>
+</div>
+</form>
+</div>
+<!-- end of modal -->
 
 
 <%- include("../partials/footer") %>
-
-<form action="/teams/<%=team.id%>?_method=DELETE" method="post"></form>
-
-<div class="ui basic modal">
-  <div class="ui icon header">
-    <i class="delete icon"></i>
-Remove Team From League?
- </div>
-  <div class="content">
-    <p>This action can not be undone. This team will be removed from the database and no longer accessible</p>
-  </div>
-  <div class="actions">
-
-    <button type='submit' class="ui yellow button">
-      <i class="checkmark icon"></i>
-      CANCEL
-    </button>
-<br><br><br>
-    <form action="/teams/<%=team.id%>?_method=DELETE" method="post">
-          <button type="submit" class="ui red button">
-      <i class="remove icon"></i>
-      PROCEED
-  </button>
-
-</form>
-
-
-
-  </div>
-</div>

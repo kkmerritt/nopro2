@@ -1,21 +1,21 @@
 <%- include("./partials/header") %>
 <br>
 <br>
-<form class="ui form" action="/register" method="post" >
+<form class="" action="/register" method="post" >
   <div class="inline field">
     <label>Player Email</label>
     <input type="text" name="username" placeholder="Email">
   </div>
-  <div class="inline field">
+  <div class="">
     <label>Player Password</label>
     <input type="text" name="password" placeholder="password">
   </div>
-  <div class="inline field">
+  <div class="">
     <label>Player First Name</label>
     <input type="text" name="firstname" placeholder="First Name">
   </div>
 
-  <div class="inline field">
+  <div class="">
     <label>Player Last Name</label>
     <input type="text" name="lastname" placeholder="Last Name">
   </div>
@@ -27,37 +27,30 @@
       </select>
     </div>
 
-  <div class="inline field">
+  <div class="">
     <label>Player Image</label>
-    <input type="text" name="image" placeholder="Enter img url">
+    <input type="text" name="image" placeholder="img url">
   </div>
-  <div class="inline field">
+  <div class="">
     <label>Is this an Captain Profile?</label>
     <input type="text" name="captaincode" placeholder="False">
   </div>
-  <div class="inline field">
+  <div class="">
     <label>Is this an Admin Profile?</label>
     <input type="text" name="admincode" placeholder="False">
   </div>
 
-
   <div class="">
       <label>Teams</label>
-      <select class="ui search dropdown" name='team'>
-        <option value="">Free Agent</option>
-
+      <select class="" name='team'>
+        <option name="Free Agent">Free Agent</option>
         <% teams.forEach(function(team){ %>
-
           <option name="<%=team.name%>"><%= team.name %></option>
-
         <% }) %>
-
-
       </select>
     </div>
 
-  <button class="ui button" type="submit">Submit</button>
-
+  <button class="" type="submit">Submit</button>
 
 </form>
 

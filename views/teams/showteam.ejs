@@ -1,17 +1,11 @@
 <%- include("../partials/header") %>
-
-
-<h3>a single team</h3>
-<h3> <%= team %></h3>
+<h5> <%= team %></h5>
 
 <ul>
-  <li><%= team.name %></li>
-  <li>Captain: <%= team.captain %></li>
+  <li>Name: <%= team.name %></li>
 
 <img src="<%= team.image %>" width="150px" alt="">
-
-  <li>Image: <%= team.image %></li>
-  <li>captain phone: <%= team.phone%></li>
+<li>Captain: <%= team.captain %></li>
   <li>Players:</li>
   <% players.forEach(function(thisPlayer){ %>
   <li><%=thisPlayer.firstname%> <%=thisPlayer.lastname%><a href="../players/<%=thisPlayer.id%>">[ Bio ]</a></li>
