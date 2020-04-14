@@ -67,7 +67,8 @@ router.get('/:id' , function(req, res){
 })
 
 //play edit form
-router.get('/:id/edit' , function(req, res){
+router.get('/:id/edit' ,
+function(req, res){
   Player.findById(req.params.id, function(err, foundPlayer){
     if(err){console.log("single player find error in the editplayer rt: " + err);
     } else {
@@ -82,9 +83,9 @@ router.get('/:id/edit' , function(req, res){
 })
 
 //player edit post to db
-router.put('/:id' , function(req, res){
-  console.log('edit player route: this is the update info:');
-  console.log(JSON.stringify(req.body))
+router.put('/:id' ,
+function(req, res){
+
   if (req.body.captaincode === "cap") {req.body.isCaptain = true;}
   if (req.body.admincode === "admin") {req.body.isAdmin = true;}
 
@@ -96,7 +97,9 @@ router.put('/:id' , function(req, res){
     team: req.body.team,
     isCaptain: req.body.isCaptain
   }
-  Player.findByIdAndUpdate(req.params.id, editPlayer,
+if (req.body.playerRemove === "TRUE") {
+  console.log('entered remove player from team route');
+  Player.findByIdAndUpdate(req.params.id, { team: "Free Agent" },
   function(err, foundPlayer){
     if (err){console.log("error in the edit single player rt: " + err);}
     else {
@@ -104,8 +107,17 @@ router.put('/:id' , function(req, res){
       res.redirect('/players/'+foundPlayer.id);
     }
   })
+} else {
+  console.log('entered general edit player');
+  Player.findByIdAndUpdate(req.params.id, editPlayer,
+  function(err, foundPlayer){
+    if (err){console.log("error in the edit single player rt: " + err);}
+    else {
+      console.log('player updated!: '+ foundPlayer)
+      res.redirect('/players/'+foundPlayer.id);
+    }
+  })}
 });
-
 
 
 //play deletion

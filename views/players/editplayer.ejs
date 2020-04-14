@@ -26,9 +26,7 @@
 
   <div class="inline field">
       <label>Teams</label>
-      <select class="ui search dropdown" name='team'>
-        <option value="">Free Agent</option>
-
+      <select class="" name='team'>
         <% teams.forEach(function(team){ %>
 
           <option name="<%=team.name%>"><%= team.name %></option>
@@ -43,29 +41,5 @@
 
 
 </form>
-
-
-
-
-
-firstname: req.body.firstname,
-lastname: req.body.lastname,
-gender: req.body.gender,
-team: req.body.team,
-image: req.body.image,
-isCaptain: req.body.isCaptain
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <%- include("../partials/footer") %>

@@ -19,19 +19,34 @@
 
 <body>
 
+
 <div id="navbar">
-<a title="Home" href="/"><i class="fas fa-home"></i></a>
-<a title="Login Here"><i class="fas fa-user" id="logBtn"></i></a>
-<a title="Signup Here" href='/signup'><i class="fas fa-sign-in-alt"></i></a>
+  <div id="logo"><img src="/img/nopro_logo.gif" alt=""></div>
 
-<a title="Instagram" href="https://www.instagram.com/noprosports"><i class="fab fa-instagram-square"></i></a>
-<a title="Facebook" href="https://www.facebook.com/noprosports"><i class="fab fa-facebook"></i></a>
-<a title="Twitter" href="https://twitter.com/noprosports/"><i class="fab fa-twitter-square"></i></a>
-<a title="Mailto:"href="mailto:info@noprosports.org"><i class="fas fa-envelope"></i></a>
 
-<a href="/teams">teams<br></a>
-<a href="/players">players<br></a>
-</div><!-- end of nabvar -->
+</div>
+
+
+
+<div id="sidebar">
+
+<a title="Home" href="/"><i class="fas fa-home"></i>  HOME</a>
+<a title="Login Here"><i class="fas fa-user" id="logBtn"></i>  LOGIN</a>
+<a title="Signup Here" href='/signup'><i class="fas fa-sign-in-alt"></i>  SIGNUP</a>
+<hr>
+<a title="Mailto:"href="mailto:info@noprosports.org"><i class="fas fa-envelope"></i>  EMAIL</a>
+<hr>
+<a title="Team Directory" href="/teams"><i class="fa fa-users"></i> TEAMS<br>DIRECTORY</a>
+<a title="Player Directory" href="/players"><i class="fa fa-user"></i> PLAYERS<br>DIRECTORY</a>
+<hr>
+<div>
+<a title="Instagram" href="https://www.instagram.com/noprosports"><i class="fab fa-instagram-square"></i> INSTAGRAM</a>
+<a title="Facebook" href="https://www.facebook.com/noprosports"><i class="fab fa-facebook"></i> FACEBOOK</a>
+<a title="Twitter" href="https://twitter.com/noprosports/"><i class="fab fa-twitter-square"></i> TWITTER</a>
+</div><hr>
+
+
+</div><!-- end of sidebar -->
 
 <!-- start of modal -->
 <!-- <div id="myModal" class="modal">
@@ -50,10 +65,6 @@
 <!-- end of modal -->
 
 
-<div class="container"><!-- main content container -->
-
-<div id="logo"><img src="/img/nopro_logo.gif" alt=""></div>
-
 <!-- flash error container -->
 <div class="container">
 <% if(error && error.length>0){ %>
@@ -65,3 +76,5 @@
 <% } %>
 </div>
 <!-- end flash error container -->
+
+<div class="container"><!-- main content container -->

@@ -1,16 +1,18 @@
 <%- include("../partials/header") %>
 
-<form class="ui form" action="/teams/<%=team.id%>?_method=PUT" method="post" >
-<div class="ui top attached label">Example</div>
-
-<div class="inline field">
+<form class="" action="/teams/<%=team.id%>?_method=PUT" method="post" >
+<div class="">
 <label>Team Name</label>
 <input type="text" name="name" value="<%=team.name%>">
 </div>
 
 <select name="captain">
 <% players.forEach(function(eachCaptain){%>
-<option value="<%=eachCaptain.firstname%>"><%=eachCaptain.firstname%></option>
+<option value="<%=eachCaptain.firstname%> <%=eachCaptain.lastname%>">
+  <%=eachCaptain.firstname%>
+  <%=eachCaptain.lastname%>
+
+</option>
 <%})%>
 </select>
 
@@ -23,9 +25,28 @@
 <button class="ui button" type="submit">Submit</button>
 
 </form>
-<!-- player listing for this team -->
-<% players.forEach(function(teamPlayers){%>
-<h5>"<%=teamPlayers.firstname%> <%=teamPlayers.lastname%>"</h5>
+<!-- player listing (and REMOVE X) -->
+<% players.forEach(function(teamPlayer){%>
+<h5>
+  <%=teamPlayer.firstname%> <%=teamPlayer.lastname%> [<%=teamPlayer.id%>]
+  <form class="" action="/players/<%=teamPlayer.id%>?_method=PUT" method="post" >
+    <button type="submit" name="playerRemove" value="TRUE">REMOVE FROM TEAM</button>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</h5>
 <%})%>
 
 <br>
