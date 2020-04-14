@@ -2,17 +2,6 @@
 
 <h3>all the teams</h3>
 
-<h4>
-<% if(currentUser){ %>
-logged in:
-<%=currentUser.firstname %> <%= currentUser.lastname %> <br>
-<small><%=currentUser %></small><br>
-<img src="<%=currentUser.image%>" height="50" width="50">
-<% } else { %>
-  No Current User Logged in.
-<%}%>
-</h4>
-
 <div class="news"><!-- begin news -->
   <h1>-- [NEWS] --</h1>
   <img src="../img/summersoftball2020.jpeg" alt="">
@@ -70,21 +59,5 @@ logged in:
 
   <iframe id='calendar' src="https://calendar.google.com/calendar/b/1/embed?height=600&amp;wkst=2&amp;bgcolor=%234285F4&amp;ctz=America%2FNew_York&amp;src=bm9wcm9zcG9ydHMub3JnXzYxMmI3NzE0dGs4cHQwNXVianViazhzbGZnQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&amp;src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%237CB342&amp;color=%237986CB&amp;showTz=0&amp;showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;title=NoPro%20Summer%20Softball%202020" style="border:solid 1px #777" frameborder="0" scrolling="no"></iframe>
 
-
-  <!-- start of modal -->
-  <div id="myModal" class="modal">
-  <form action="/login" method="post">
-  <div class="modal-content">
-  <span class="close"><i class="fas fa-window-close"></i></span>
-  <p>Please login:</p>
-  <label for="email">email</label>
-  <input type="text" name="username">
-  <label for="email">password</label>
-  <input type="text" name="password">
-  <button type="submit" class="fas fa-arrow-circle-right" id="myBtn"></button>
-  </div>
-  </form>
-  </div>
-  <!-- end of modal -->
 
 <%- include("./partials/footer.ejs") %>

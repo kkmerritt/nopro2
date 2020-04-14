@@ -18,17 +18,17 @@ li {
   text-align: justify;
 }
 .container {
-  margin: 2em 10em;
+padding: 15%;
   text-align: center;
 }
 
 #navbar {
-  margin-top: -31px;
+  display: flex;
   position:fixed;
   font-weight: bold;
-  text-align: justify;
-  background: aliceblue;
-  border: solid lightgray 1px;
+  text-align: center;
+  background: transparent;
+  /* border: solid lightgray 1px; */
   width: 100%;
 
   overflow: hidden;
@@ -36,13 +36,15 @@ li {
 #logo {
   display: block;
   padding: 1em;
-  /* border-bottom: 2px solid lightgray; */
-
 }
-
 #logo img {
-  max-width: 10%;
+max-width: 50%;
 }
+
+ #userIn {
+   margin-left: 70%;
+ }
+
 
 #sidebar {
   margin-top: 30px;
@@ -116,8 +118,9 @@ li {
 }
 
 .footer {
-  text-align: center;
-  background: lightgray;
-  width: 100%;
-  height: 2em;
+   position:fixed;
+   bottom:0;
+   width:100%;
+   height:4em;   /* Height of the footer */
+   background: aliceblue;
 }

@@ -19,10 +19,21 @@
 
 <body>
 
-
 <div id="navbar">
   <div id="logo"><img src="/img/nopro_logo.gif" alt=""></div>
+<div id="userIn">
 
+
+  <% if(currentUser){ %>
+<br>
+   <img src="<%=currentUser.image%>" height="50" width="50">
+   <br>
+  <%=currentUser.firstname %> <%= currentUser.lastname %> <br>
+
+  <% } else { %>
+    No Current User Logged in.
+  <%}%>
+</div>
 
 </div>
 
@@ -31,7 +42,7 @@
 <div id="sidebar">
 
 <a title="Home" href="/"><i class="fas fa-home"></i>  HOME</a>
-<a title="Login Here"><i class="fas fa-user" id="logBtn"></i>  LOGIN</a>
+<a title="Login Here" id="logBtn"><i class="fas fa-user"></i>  LOGIN</a>
 <a title="Signup Here" href='/signup'><i class="fas fa-sign-in-alt"></i>  SIGNUP</a>
 <hr>
 <a title="Mailto:"href="mailto:info@noprosports.org"><i class="fas fa-envelope"></i>  EMAIL</a>
@@ -49,7 +60,7 @@
 </div><!-- end of sidebar -->
 
 <!-- start of modal -->
-<!-- <div id="myModal" class="modal">
+<div id="myModal" class="modal">
 <form action="/login" method="post">
 <div class="modal-content">
 <span class="close"><i class="fas fa-window-close"></i></span>
@@ -61,12 +72,12 @@
 <button type="submit" class="fas fa-arrow-circle-right" id="myBtn"></button>
 </div>
 </form>
-</div> -->
+</div>
 <!-- end of modal -->
 
 
 <!-- flash error container -->
-<div class="container">
+<div class="flash-container">
 <% if(error && error.length>0){ %>
 <div class="alert alert-danger" role="alert"><%= error %></div>
 <% } %>
