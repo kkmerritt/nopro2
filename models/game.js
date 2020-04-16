@@ -6,7 +6,8 @@ var gameSchema = new mongoose.Schema({
   //make a field image with the number on the img
   field: String,
   // teams: [{type:mongoose.Schema.Types.ObjectId, ref: "Team"}]
-  teams: String
+  home: String,
+  away: String,
 });
 
 var Game = mongoose.model("Game", gameSchema);

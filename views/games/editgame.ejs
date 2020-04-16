@@ -1,1 +1,44 @@
-<h1>edit game game here</h1>
+<h4>you are about to edit this game:</h4>
+<h4><%= game %> </h4>
+
+<h3>
+please enter the new game information:</h3>
+<form class="" action="/games/<%=game.id%>?_method=PUT" method="post">
+  <label>PREVIOUS DATE:</label>
+  <label><%=game.date%></label><br>
+  <label>NEW DATE of GAME:</label>
+  <input type="date" name="date" value="date"><br>
+
+
+  <label>PREVIOUS FIELD:</label>
+  <label><%=game.field%></label><br>
+  <label>NEW FIELD:</label>
+  <select name="field">
+    <option value="Field One">Field One</option>
+    <option value="Field One">Field Two</option>
+    <option value="Field One">Field Three</option>
+  </select><br><br>
+
+  <label>PREVIOUS HOME TEAM:</label>
+  <label><%=game.home%></label><br>
+  <label>NEW HOME TEAM:</label>
+  <select name="home" value="Home Team">
+    <% teams.forEach(function(team){ %>
+      <option value="<%=team.name%>"><%=team.name%></option>
+      <% }); %>
+    </select><br><br>
+
+
+    <label>PREVIOUS AWAY TEAM:</label>
+    <label><%=game.away%></label><br>
+    <label>NEW AWAY TEAM:</label>
+    <select name="away" value="Home Team">
+      <% teams.forEach(function(team){ %>
+        <option value="<%=team.name%>"><%=team.name%></option>
+        <% }); %>
+      </select><br>
+
+<br><br><br>
+      <button type="submit">Save This EDITED Game</button>
+
+    </form>

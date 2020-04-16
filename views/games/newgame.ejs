@@ -1,1 +1,35 @@
-<h1>new game here</h1>
+
+<h3>
+please enter the new game information:</h3>
+<form class="" action="/games" method="post">
+  <label>DATE of GAME:</label>
+
+  <input type="date" name="date" value="date"><br>
+  <label>FIELD:</label>
+
+  <select name="field">
+    <option value="Field One">Field One</option>
+    <option value="Field One">Field Two</option>
+    <option value="Field One">Field Three</option>
+  </select><br><br>
+
+
+
+  <label>HOME TEAM:</label>
+  <select name="home" placeholder="Home Team">
+    <% teams.forEach(function(team){ %>
+      <option value="<%=team.name%>"><%=team.name%></option>
+      <% }); %>
+    </select><br>
+
+    <label>AWAY TEAM:</label>
+    <select name="away" placeholder="Home Team">
+      <% teams.forEach(function(team){ %>
+        <option value="<%=team.name%>"><%=team.name%></option>
+        <% }); %>
+      </select><br>
+
+
+      <button type="submit">Save Game</button>
+
+    </form>

@@ -1,1 +1,15 @@
-<h1>how game here</h1>
+<h1>show game page</h1>
+<h4>game obj: </h4>
+<h5><%= game %></h5>
+
+<br>
+<h4>home team: <a href="/teams/<%= home.id %>"><%= home.name %></a></h4>
+<h4>away team: <a href="/teams/<%= away.id %>"><%= away.name %></a></h4>
+
+
+
+
+
+<form action="/games/<%=game.id%>?_method=DELETE" method="post">
+  <button type="submit">DELETE THIS GAME</button>
+</form>

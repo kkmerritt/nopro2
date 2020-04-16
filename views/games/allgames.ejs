@@ -1,4 +1,17 @@
 <h1>games list here</h1>
+
+<ul>
+
+<% games.forEach(function(game){ %>
+<li>
+  <%=game.home%> vs <%=game.away%>
+  <a href="games/<%=game.id%>/edit">[edit game]</a>
+  <a href="games/<%=game.id%>">[view game]</a>
+
+</li>
+
+<% })%>
+
+</ul>
+
 <a href="games/new">new game</a>
-<a href="games/:id">show an indvidual game</a>
-<a href="games/:id/edit">edit an indvidual game</a>
