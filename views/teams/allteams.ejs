@@ -1,19 +1,17 @@
 <%- include("../partials/header") %>
-
 <h3>Team Directory</h3>
-<h5>current user:<%= currentUser %></h5>
 
+<div class="display">
 <% teams.forEach(function(team){ %>
 <ul>
-  <a href="teams/<%=team.id%>">
-    <li><strong><%=team.name%></strong></li>
-  </a>
-  <li><%=team.captain%> contact info</li>
-    <li><%=team.players%></li>
+  <h2><a href="teams/<%=team.id%>"><li><strong><%=team.name%></strong></li></a></h2>
+<a href="teams/<%=team.id%>"><img src="<%=team.image%>" width="75px"></a>
+  <li>Captain: <%=team.captain%></li>
 </ul>
   <% }) %>
   <p> ----------  </p>
   <a href="/teams/new">Enter a new Team</a>
   <p> ----------  </p>
+</div>
 
 <%- include("../partials/footer") %>

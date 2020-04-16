@@ -19,6 +19,7 @@ server.use(flash());
 LocalStrategy = require('passport-local');
 Team = require('./models/team');
 Player = require('./models/player');
+Game = require('./models/game');
 
 
 //passport config
@@ -47,8 +48,11 @@ server.use(function(req, res, next){
 
 var teamRoutes = require('./routes/teams');
 var playerRoutes = require('./routes/players');
+var gameRoutes = require('./routes/games');
+
 server.use("/teams",teamRoutes);
 server.use("/players", playerRoutes);
+server.use("/games",gameRoutes);
 
 
 //-------<[ LOCAL DEVELOPMENT DATABASE ]

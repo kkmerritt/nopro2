@@ -130,5 +130,9 @@ router.delete('/:id' , function(req, res){
   })
 });
 
+router.get('*', function(req,res){
+    res.redirect('/players');
+    console.log("hit the * route in players");
+  })
 
 module.exports = router;

@@ -49,7 +49,11 @@ function(req, res){
 router.get('/:id' ,
 function(req, res){
   Team.findById(req.params.id, function(err, foundTeam){
-    if(err){console.log("single team show page error: " + err);}
+    if(err){
+      console.log("single team show page error: " + err);
+      req.flash("error",  err.message)
+      res.redirect('/teams')
+    }
     else {
       Player.find({team: foundTeam.name},
         function(err, foundPlayers){
@@ -74,36 +78,45 @@ function(req, res){
           else{
             res.render('teams/editteam.ejs', {team: foundTeam, players: foundPlayers});
           }
-        })
-      }})})
+        });
+      }}
+    )
+  });
 
-          //------[edit 1 team]
-          router.put('/:id',
-          function(req, res){
-            var editTeam = {
-              name: req.body.name,
-              captain: req.body.captain,
-              phone: req.body.phone}
-              Team.findByIdAndUpdate(req.params.id, editTeam,
-                function(err, foundTeam){
-                  if (err){console.log("error in the updating of a team to edit: "+err);}
-                  else {
-                    console.log('team updated!: '+ foundTeam)
-                    res.redirect('/teams/'+foundTeam.id);
-                  }
-                })
-              });
 
-              //------[delete 1 team]
-              router.delete('/:id',
-              function(req, res){
-                Team.findByIdAndRemove(req.params.id,
-                  function(err){
-                    if (err){console.log("error with team deletion: "+err);}
-                    else{
-                      res.redirect('/teams');
-                    }
-                  });
-                });
+//------[edit 1 team]
+router.put('/:id',
+function(req, res){
+  var editTeam = {
+    name: req.body.name,
+    captain: req.body.captain,
+    image: req.body.image
+  }
+    Team.findByIdAndUpdate(req.params.id, editTeam,
+      function(err, foundTeam){
+        if (err){console.log("error in the updating of a team to edit: "+err);}
+        else {
+          console.log('team updated!: '+ foundTeam)
+          res.redirect('/teams/'+foundTeam.id);
+        }
+      })
+    });
 
-                module.exports = router;
+//------[delete 1 team]
+router.delete('/:id',
+function(req, res){
+  Team.findByIdAndRemove(req.params.id,
+    function(err){
+      if (err){console.log("error with team deletion: "+err);}
+      else{
+        res.redirect('/teams');
+      }
+    });
+  });
+
+router.get('*', function(req,res){
+    res.redirect('/teams');
+    console.log("hit the * route in teams");
+  })
+
+  module.exports = router;
