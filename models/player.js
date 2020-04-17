@@ -3,11 +3,8 @@ var mongoose = require("mongoose");
 var passportLocalMongoose = require('passport-local-mongoose');
 
 var playerSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    unique: true,
-    match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
-  },
+  //username is the email
+  username: {type:String, unique:true, required:true},
   password: String,
   firstname: String,
   lastname: String,
@@ -16,6 +13,9 @@ var playerSchema = new mongoose.Schema({
   image: {type: String, default: 'https://i.imgur.com/T1Fn4h5.png'},
   isAdmin: {type: Boolean, default: false},
   isCaptain: {type: Boolean, default: false},
+
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
 });
 
 playerSchema.plugin(passportLocalMongoose);

@@ -1,25 +1,26 @@
 <%- include("./partials/header") %>
 <br>
 <br>
-<form class="" action="/register" method="post" >
-  <div class="inline field">
-    <label>Player Email</label>
-    <input type="text" name="username" placeholder="Email">
-  </div>
-  <div class="">
-    <label>Player Password</label>
-    <input type="text" name="password" placeholder="password">
-  </div>
-  <div class="">
-    <label>Player First Name</label>
-    <input type="text" name="firstname" placeholder="First Name">
-  </div>
+<h3>Please Finish the Signup Process!</h3>
 
-  <div class="">
-    <label>Player Last Name</label>
-    <input type="text" name="lastname" placeholder="Last Name">
-  </div>
-  <div class="">
+<% if(currentUser){ %>
+  <h5><%= currentUser %></h5>
+
+  <form class="" action="/register" method="post" >
+    <div class="inline field">
+      <label><%= currentUser.username %></label>
+    </div>
+
+    <div class="">
+      <label>Player First Name</label>
+      <input type="text" name="firstname" placeholder="First Name">
+    </div>
+
+    <div class="">
+      <label>Player Last Name</label>
+      <input type="text" name="lastname" placeholder="Last Name">
+    </div>
+    <div class="">
       <label>Gender</label>
       <select class="" name='gender'>
         <option value="Male">Male</option>
@@ -27,32 +28,41 @@
       </select>
     </div>
 
-  <div class="">
-    <label>Player Image</label>
-    <input type="text" name="image" placeholder="img url">
-  </div>
-  <div class="">
-    <label>Is this an Captain Profile?</label>
-    <input type="text" name="captaincode" placeholder="False">
-  </div>
-  <div class="">
-    <label>Is this an Admin Profile?</label>
-    <input type="text" name="admincode" placeholder="False">
-  </div>
+    <div class="">
+      <label>Player Image</label>
+      <input type="text" name="image" placeholder="img url">
+    </div>
+    <div class="">
+      <label>Is this an Captain Profile?</label>
+      <input type="text" name="captaincode" placeholder="False">
+    </div>
+    <div class="">
+      <label>Is this an Admin Profile?</label>
+      <input type="text" name="admincode" placeholder="False">
+    </div>
 
-  <div class="">
+    <div class="">
       <label>Teams</label>
       <select class="" name='team'>
         <option name="Free Agent">Free Agent</option>
         <% teams.forEach(function(team){ %>
           <option name="<%=team.name%>"><%= team.name %></option>
-        <% }) %>
-      </select>
-    </div>
+          <% }) %>
+        </select>
+      </div>
 
-  <button class="" type="submit">Submit</button>
+      <button class="" type="submit">Submit</button>
 
-</form>
+    </form>
+
+<% } else { %>
+<h1>no current user logged in</h1>
+<h5>please return to the initialize email section</h5>
+<a href="/init">Initialize Email</a>
+<%}%>
+
+
+
 
 
 
