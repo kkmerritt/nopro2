@@ -1,5 +1,5 @@
 <%- include("../partials/header") %>
-
+<h5><%=player%></h5>
 <form class="ui form" action="/players/<%=player.id%>?_method=PUT" method="post" >
 
   <div class="">
@@ -40,6 +40,10 @@
   <button class="ui button" type="submit">Submit</button>
 
 
+</form>
+
+<form class="" action="/players/<%=player.id%>?_method=DELETE" method="post" >
+<button type="submit" name="button">Delete Player</button>
 </form>
 
 <%- include("../partials/footer") %>

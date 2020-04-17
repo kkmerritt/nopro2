@@ -85,38 +85,38 @@ passport.authenticate('local',
   // res.render('index.ejs'); //redirect back to '/' now logged in.
 });
 
-
-server.post('/register' , function(req, res){
-  console.log('player creation info about to be entered: req.body:'+JSON.stringify(req.body));
-  if (req.body.admincode === "admin") {req.body.isAdmin = true;}
-  if (req.body.captaincode === "cap") {req.body.isCaptain = true;}
-  if (req.body.gender === "Male") {req.body.image = 'https://i.imgur.com/lgMFKR7.png';}
-
-  var newPlayer = {
-    username: req.body.username, //user enters 'email'
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-    gender: req.body.gender,
-    image: req.body.image,
-    team: req.body.team,
-    isAdmin: req.body.isAdmin,
-    isCaptain: req.body.isCaptain
-  }
-
-  Player.register(newPlayer, req.body.password, function(err, newPlayer){
-    if(err){
-      console.log('new player root creation error: ' + err);
-      req.flash("error", err.message);
-      res.redirect('/signup')
-    } else {
-      passport.authenticate('local')(req, res, function(){
-        console.log("new player registered (logged in) and + database :" + JSON.stringify(newPlayer))
-        req.flash("success", "New Player has been Created! Woot motherfuckin, WOOT");
-        res.redirect("/");
-      })
-    }
-  })
-});
+//
+// server.post('/register' , function(req, res){
+//   console.log('player creation info about to be entered: req.body:'+JSON.stringify(req.body));
+//   if (req.body.admincode === "admin") {req.body.isAdmin = true;}
+//   if (req.body.captaincode === "cap") {req.body.isCaptain = true;}
+//   if (req.body.gender === "Male") {req.body.image = 'https://i.imgur.com/lgMFKR7.png';}
+//
+//   var newPlayer = {
+//     username: req.body.username, //user enters 'email'
+//     firstname: req.body.firstname,
+//     lastname: req.body.lastname,
+//     gender: req.body.gender,
+//     image: req.body.image,
+//     team: req.body.team,
+//     isAdmin: req.body.isAdmin,
+//     isCaptain: req.body.isCaptain
+//   }
+//
+//   Player.register(newPlayer, req.body.password, function(err, newPlayer){
+//     if(err){
+//       console.log('new player root creation error: ' + err);
+//       req.flash("error", err.message);
+//       res.redirect('/signup')
+//     } else {
+//       passport.authenticate('local')(req, res, function(){
+//         console.log("new player registered (logged in) and + database :" + JSON.stringify(newPlayer))
+//         req.flash("success", "New Player has been Created! Woot motherfuckin, WOOT");
+//         res.redirect("/");
+//       })
+//     }
+//   })
+// });
 
 server.get('/signup' , function(req, res){
     Team.find({}, function(err, allTeams){
@@ -158,9 +158,38 @@ server.get('/signup' , function(req, res){
       function(token, done) {
         Player.findOne({ username: req.body.username }, function(err, user) {
           if (!user) {
-            console.log('error on the Player findOne username')
-            req.flash('error', 'No account with that email address exists.');
-            return res.redirect('/init');
+            var newPlayer = {
+              username: req.body.username, //user enters 'email'
+            }
+            var tempPassword = "tempassword"
+
+            Player.register(newPlayer, tempPassword, function(err, newPlayer){
+              if(err){console.log('new player init route error: ' + err);}
+              else {
+              console.log('new player registered with just this info:' + newPlayer)
+                  // res.redirect("/init");
+                  Player.findOne({ username: req.body.username }, function(err, user) {
+                    user.resetPasswordToken = token;
+                    user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+                    user.save(function(err) {
+                      console.log('found a player: '+user.username+ ' setting a token')
+                      done(err, token, user);
+                    });
+
+                  })
+
+
+
+                }
+                })
+
+
+
+
+            // console.log('error on the Player findOne username')
+            // req.flash('error', 'No account with that email address exists.');
+            return res.render('confirm');
           }
           user.resetPasswordToken = token;
           user.resetPasswordExpires = Date.now() + 3600000; // 1 hour

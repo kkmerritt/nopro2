@@ -3,12 +3,16 @@
 <br>
 <h3>Please Finish the Signup Process!</h3>
 
+
 <% if(currentUser){ %>
+<!-- just in case someone types /signup -->
   <h5><%= currentUser %></h5>
 
-  <form class="" action="/register" method="post" >
+  <form class="" action="/players/<%=currentUser.id%>?_method=PUT" method="post" >
     <div class="inline field">
       <label><%= currentUser.username %></label>
+      <input type="text" name="username" value="<%= currentUser.username %>" readonly>
+
     </div>
 
     <div class="">

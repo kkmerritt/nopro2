@@ -95,7 +95,8 @@ function(req, res){
     gender: req.body.gender,
     image: req.body.image,
     team: req.body.team,
-    isCaptain: req.body.isCaptain
+    isCaptain: req.body.isCaptain,
+    isAdmin: req.body.isAdmin,
   }
 if (req.body.playerRemove === "TRUE") {
   console.log('entered remove player from team route');
