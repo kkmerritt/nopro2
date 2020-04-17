@@ -1,14 +1,21 @@
 <h1>show game page</h1>
-<h4>game obj: </h4>
-<h5><%= game %></h5>
 
-<br>
 <h4>home team: <a href="/teams/<%= home.id %>"><%= home.name %></a></h4>
 <h4>away team: <a href="/teams/<%= away.id %>"><%= away.name %></a></h4>
 
+<h4>
+MONTH : <%= game.date.month %> -
+DATE : <%= game.date.day %> -
+TIME : <%= game.date.time %> - 
+</h4>
 
 
-
+<h4>Field : <%= game.field %></h4>
+<a href="/games">Return to All Games</a>
+<br><br>
+<a href="/games/<%=game.id%>/edit"><button type="submit">EDIT GAME</button></a>
+<br>
+<br>
 
 <form action="/games/<%=game.id%>?_method=DELETE" method="post">
   <button type="submit">DELETE THIS GAME</button>

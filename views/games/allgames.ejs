@@ -1,17 +1,12 @@
 <h1>games list here</h1>
 
 <ul>
-
 <% games.forEach(function(game){ %>
 <li>
-  <%=game.home%> vs <%=game.away%>
-  <a href="games/<%=game.id%>/edit">[edit game]</a>
+  <%=game.home%> vs <%=game.away%>  @ <%=game.date%>
   <a href="games/<%=game.id%>">[view game]</a>
-
 </li>
-
 <% })%>
-
 </ul>
 
 <a href="games/new">new game</a>

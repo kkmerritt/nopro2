@@ -45,27 +45,20 @@ res.redirect("games/" + newGame._id);
 }
 });
 });
-//
-// var auth = Auth.findOne({nick: 'noname'}).exec();
-// auth.then(function (doc) {console.log(doc)});
-
 
 //------[show 1 game]
 router.get('/:id' ,
 function(req, res){
 Game.findById(req.params.id, function(err, foundGame){
 if(err){console.log("single game show page error: " + err);}
+
 Team.findOne({name: foundGame.home}, function(err, foundHomeTeam){
 if(err){console.log("err finding hometeam for game show page: " + err);}
-else {console.log('found home team is: ' + foundHomeTeam);
+
 Team.findOne({name: foundGame.away}, function(err, foundAwayTeam){
 if(err){console.log("err finding awayteam for game show page: " + err);}
-else {
-console.log('found away team is: ' + foundAwayTeam)
 res.render("games/showgame" , {game : foundGame, home: foundHomeTeam, away:foundAwayTeam});
-}
 })
-}
 })
 });
 });
