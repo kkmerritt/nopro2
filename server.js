@@ -31,8 +31,7 @@ var gameRoutes = require('./routes/games');
 //-------<[ HEROKU/MONGO DEPLOYED DATABASE ]
 
 
-mongoose.connect(process.env.DATABASE_URL,{ useUnifiedTopology: true, useNewUrlParser: true});
-
+mongoose.connect(process.env.DATABASE_URL,{ useUnifiedTopology: true, useNewUrlParser: true}).catch(error => console.error("mongoose.connect error: " + error));
 
 
 
