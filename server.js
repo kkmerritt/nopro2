@@ -62,11 +62,13 @@ server.use("/games",gameRoutes);
 
 
 //-------<[ LOCAL DEVELOPMENT DATABASE ]
-mongoose.connect("mongodb://localhost:27017/noprodb",
-{ useUnifiedTopology: true, useNewUrlParser: true});
-// -------<[ HEROKU/MONGO DEPLOYED DATABASE ]
-// mongoose.connect(process.env.DATABASEURL,{ useUnifiedTopology: true, useNewUrlParser: true});
-// app.use(bodyParser.urlencoded({extended: true}));
+// mongoose.connect("mongodb://localhost:27017/noprodb",
+// { useUnifiedTopology: true, useNewUrlParser: true});
+
+//-------<[ HEROKU/MONGO DEPLOYED DATABASE ]
+mongoose.connect(process.env.DATABASEURL,{ useUnifiedTopology: true, useNewUrlParser: true});
+app.use(bodyParser.urlencoded({extended: true}));
+
 
 
 //display the basic home page no login required
