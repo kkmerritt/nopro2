@@ -29,11 +29,18 @@ var gameRoutes = require('./routes/games');
 // { useUnifiedTopology: true, useNewUrlParser: true});
 
 //-------<[ HEROKU/MONGO DEPLOYED DATABASE ]
-mongoose.connect(process.env.DATABASE_URL,{ useUnifiedTopology: true, useNewUrlParser: true});
+
+const url = "mongodb+srv://kev:kermit@cluster0-rgmb9.gcp.mongodb.net/test?retryWrites=true&w=majority";
+
+
+
+mongoose.connect(url,{ useUnifiedTopology: true, useNewUrlParser: true});
 server.use(bodyParser.urlencoded({extended: true}));
 
 
-//REMEMBER TO DEFINE THIS SHIT BEFORE ROUTES, moron
+
+
+
 server.use(bodyParser.urlencoded({extended: true}));
 server.use(methodOverride('_method'));
 server.set('view engine', 'ejs');
