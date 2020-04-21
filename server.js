@@ -9,10 +9,20 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var methodOverride = require('method-override');
 var middleware = require('./middleware');
-var flash = require('connect-flash'); //express session sets up a lot of this already
 var async = require("async");
 var nodemailer = require("nodemailer");
 var crypto = require("crypto");
+var flash = require('connect-flash'); //express session sets up a lot of this already
+
+LocalStrategy = require('passport-local');
+Team = require('./models/team');
+Player = require('./models/player');
+Game = require('./models/game');
+
+
+var teamRoutes = require('./routes/teams');
+var playerRoutes = require('./routes/players');
+var gameRoutes = require('./routes/games');
 
 
 //-------<[ LOCAL DEVELOPMENT DATABASE ]
@@ -30,11 +40,6 @@ server.use(methodOverride('_method'));
 server.set('view engine', 'ejs');
 server.use(express.static(__dirname + "/public"))
 server.use(flash());
-
-LocalStrategy = require('passport-local');
-Team = require('./models/team');
-Player = require('./models/player');
-Game = require('./models/game');
 
 
 //passport config
@@ -60,10 +65,6 @@ server.use(function(req, res, next){
    next();
 });
 
-
-var teamRoutes = require('./routes/teams');
-var playerRoutes = require('./routes/players');
-var gameRoutes = require('./routes/games');
 
 server.use("/teams",teamRoutes);
 server.use("/players", playerRoutes);
