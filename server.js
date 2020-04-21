@@ -67,7 +67,7 @@ server.use("/games",gameRoutes);
 
 //-------<[ HEROKU/MONGO DEPLOYED DATABASE ]
 mongoose.connect(process.env.DATABASEURL,{ useUnifiedTopology: true, useNewUrlParser: true});
-app.use(bodyParser.urlencoded({extended: true}));
+server.use(bodyParser.urlencoded({extended: true}));
 
 
 
