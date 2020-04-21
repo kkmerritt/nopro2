@@ -20,7 +20,7 @@ var crypto = require("crypto");
 // { useUnifiedTopology: true, useNewUrlParser: true});
 
 //-------<[ HEROKU/MONGO DEPLOYED DATABASE ]
-mongoose.connect(process.env.DATABASE_URL,{ useUnifiedTopology: true, useNewUrlParser: true});
+mongoose.connect('mongodb+srv://kev_merritt:dingodog666@cluster0-rgmb9.gcp.mongodb.net/test?retryWrites=true&w=majority',{ useUnifiedTopology: true, useNewUrlParser: true});
 server.use(bodyParser.urlencoded({extended: true}));
 
 
