@@ -1,3 +1,6 @@
+<%- include("../partials/header") %>
+
+
 <h4>you are about to edit this game:</h4>
 <h4><%= game %> </h4>
 
@@ -100,3 +103,5 @@ please enter the new game information:</h3>
     <form action="/games/<%=game.id%>?_method=DELETE" method="post">
       <button type="submit">DELETE THIS GAME</button>
     </form>
+
+    <%- include("../partials/footer") %>

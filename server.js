@@ -135,10 +135,6 @@ server.get('/signup' , function(req, res){
 
 
 
-
-
-
-
   // forgot password route & init user route
 
 
@@ -158,36 +154,30 @@ server.get('/signup' , function(req, res){
       function(token, done) {
         Player.findOne({ username: req.body.username }, function(err, user) {
           if (!user) {
+            console.log('email not found, creating a new user with email')
             var newPlayer = {
               username: req.body.username, //user enters 'email'
             }
-            var tempPassword = "tempassword"
+            // var tempPassword = "tempassword"
 
-            Player.register(newPlayer, tempPassword, function(err, newPlayer){
+            Player.register(newPlayer, 'tempPassword', function(err, newPlayer){
               if(err){console.log('new player init route error: ' + err);}
-              else {
-              console.log('new player registered with just this info:' + newPlayer)
+              else {console.log('new email registered: ' + newPlayer)
                   // res.redirect("/init");
                   Player.findOne({ username: req.body.username }, function(err, user) {
                     user.resetPasswordToken = token;
-                    user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+                    user.resetPasswordExpires = Date.now() + 10800000; // 3 hours
 
                     user.save(function(err) {
-                      console.log('found a player: '+user.username+ ' setting a token')
+                      console.log('found email: '+user.username+ ' setting a token')
                       done(err, token, user);
                     });
 
                   })
-
-
-
                 }
+
                 })
 
-
-
-
-            // console.log('error on the Player findOne username')
             // req.flash('error', 'No account with that email address exists.');
             return res.render('confirm');
           }
@@ -285,7 +275,7 @@ server.get('/signup' , function(req, res){
         });
       }
     ], function(err) {
-
+      console.log('err redirecting to signup:' + err)
 
       res.redirect('/signup');
     });

@@ -1,11 +1,10 @@
 <%- include("./partials/header") %>
 <br>
 <br>
-<h3>Please Finish the Signup Process!</h3>
+<h3>/signup here. verify info</h3>
 
 
 <% if(currentUser){ %>
-<!-- just in case someone types /signup -->
   <h5><%= currentUser %></h5>
 
   <form class="" action="/players/<%=currentUser.id%>?_method=PUT" method="post" >
@@ -17,12 +16,12 @@
 
     <div class="">
       <label>Player First Name</label>
-      <input type="text" name="firstname" placeholder="First Name">
+      <input type="text" name="firstname" value="<%= currentUser.firstname %>">
     </div>
 
     <div class="">
       <label>Player Last Name</label>
-      <input type="text" name="lastname" placeholder="Last Name">
+      <input type="text" name="lastname" value="<%= currentUser.lastname %>">
     </div>
     <div class="">
       <label>Gender</label>
@@ -34,16 +33,26 @@
 
     <div class="">
       <label>Player Image</label>
-      <input type="text" name="image" placeholder="img url">
+      <input type="text" name="image" value="<%= currentUser.image %>">
     </div>
+
+    <% if(currentUser.isCaptain){ %>
+      <p>you have captain status</p>
+    <% } else { %>
     <div class="">
-      <label>Is this an Captain Profile?</label>
+      <label>Captain Access?</label>
       <input type="text" name="captaincode" placeholder="False">
     </div>
+    <%}%>
+
+    <% if(currentUser.isAdmin){ %>
+      <p>you have admin access</p>
+      <% } else { %>
     <div class="">
-      <label>Is this an Admin Profile?</label>
+      <label>Admin Access</label>
       <input type="text" name="admincode" placeholder="False">
     </div>
+    <%}%>
 
     <div class="">
       <label>Teams</label>

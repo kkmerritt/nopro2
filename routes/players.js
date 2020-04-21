@@ -75,7 +75,9 @@ function(req, res){
       Team.find({}, function(err, allTeams){
         if(err){console.log("allteams find error in the editplayer rt: " + err);
         } else {
-          res.render('players/editplayer.ejs',{teams : allTeams, player : foundPlayer});
+          res.render('signup.ejs',{teams : allTeams, player : foundPlayer});
+
+          // res.render('players/editplayer.ejs',{teams : allTeams, player : foundPlayer});
         }
       })
       }
