@@ -1,6 +1,5 @@
 // configure dotenv
 require('dotenv').config()
-// require('dotenv').load();
 
 var express = require('express');
 var server = express();               //'const'
@@ -14,6 +13,16 @@ var flash = require('connect-flash'); //express session sets up a lot of this al
 var async = require("async");
 var nodemailer = require("nodemailer");
 var crypto = require("crypto");
+
+
+//-------<[ LOCAL DEVELOPMENT DATABASE ]
+// mongoose.connect("mongodb://localhost:27017/noprodb",
+// { useUnifiedTopology: true, useNewUrlParser: true});
+
+//-------<[ HEROKU/MONGO DEPLOYED DATABASE ]
+mongoose.connect(process.env.DATABASE_URL,{ useUnifiedTopology: true, useNewUrlParser: true});
+server.use(bodyParser.urlencoded({extended: true}));
+
 
 //REMEMBER TO DEFINE THIS SHIT BEFORE ROUTES, moron
 server.use(bodyParser.urlencoded({extended: true}));
@@ -59,15 +68,6 @@ var gameRoutes = require('./routes/games');
 server.use("/teams",teamRoutes);
 server.use("/players", playerRoutes);
 server.use("/games",gameRoutes);
-
-
-//-------<[ LOCAL DEVELOPMENT DATABASE ]
-// mongoose.connect("mongodb://localhost:27017/noprodb",
-// { useUnifiedTopology: true, useNewUrlParser: true});
-
-//-------<[ HEROKU/MONGO DEPLOYED DATABASE ]
-mongoose.connect(process.env.DATABASEURL,{ useUnifiedTopology: true, useNewUrlParser: true});
-server.use(bodyParser.urlencoded({extended: true}));
 
 
 
