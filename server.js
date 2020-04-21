@@ -30,11 +30,8 @@ var gameRoutes = require('./routes/games');
 
 //-------<[ HEROKU/MONGO DEPLOYED DATABASE ]
 
-const url = "mongodb+srv://kev:kermit@cluster0-rgmb9.gcp.mongodb.net/test?retryWrites=true&w=majority";
 
-
-
-mongoose.connect(url,{ useUnifiedTopology: true, useNewUrlParser: true});
+mongoose.connect(process.env.DATABASE_URL,{ useUnifiedTopology: true, useNewUrlParser: true});
 server.use(bodyParser.urlencoded({extended: true}));
 
 
