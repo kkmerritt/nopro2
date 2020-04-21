@@ -20,11 +20,6 @@ Player = require('./models/player');
 Game = require('./models/game');
 
 
-var teamRoutes = require('./routes/teams');
-var playerRoutes = require('./routes/players');
-var gameRoutes = require('./routes/games');
-
-
 //-------<[ LOCAL DEVELOPMENT DATABASE ]
 // mongoose.connect("mongodb://localhost:27017/noprodb",
 // { useUnifiedTopology: true, useNewUrlParser: true});
@@ -65,6 +60,10 @@ server.use(function(req, res, next){
    next();
 });
 
+
+var teamRoutes = require('./routes/teams');
+var playerRoutes = require('./routes/players');
+var gameRoutes = require('./routes/games');
 
 server.use("/teams",teamRoutes);
 server.use("/players", playerRoutes);
