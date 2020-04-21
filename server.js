@@ -32,7 +32,6 @@ var gameRoutes = require('./routes/games');
 
 
 mongoose.connect(process.env.DATABASE_URL,{ useUnifiedTopology: true, useNewUrlParser: true});
-server.use(bodyParser.urlencoded({extended: true}));
 
 
 
