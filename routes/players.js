@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var middleware = require('../middleware');
-var Teams = require('../models/teams');
+var Teams = require('../models/team');
 
 
 

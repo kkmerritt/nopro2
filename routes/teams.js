@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var middleware = require('../middleware');
-var Players = require('../models/players');
+var Players = require('../models/player');
 
 
 //------[show all teams]
