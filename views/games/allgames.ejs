@@ -1,12 +1,42 @@
 <%- include("../partials/header") %>
 
+
+
+<!-- sort games start  -->
+<%
+for (var i = 0;i<games.length;i++){
+for (var j = 0;j<games.length;j++){
+if ( Number(games[i].date.month) < Number(games[j].date.month) ){
+var temp = games[i];
+games[i] = games[j];
+games[j] = temp;
+}
+}
+}
+%>
+
+<%
+for (var i = 0; i<games.length; i++){
+for (var j = 0; j<games.length; j++){
+if ( Number(games[i].date.day) < Number(games[j].date.day) && Number(games[i].date.month) === Number(games[j].date.month) ){
+var temp = games[i];
+games[i] = games[j];
+games[j] = temp;
+}
+}
+}
+%>
+<!-- sort games end  -->
+
+
+
+
 <h1>games list here</h1>
 
 <ul>
 <% games.forEach(function(game){ %>
 <li>
-  <%=game.home%> vs <%=game.away%>  @ <%=game.date%>
-  <a href="games/<%=game.id%>">[view game]</a>
+  <%=game.home%> vs <%=game.away%> @ <%=game.date%> <a href="games/<%=game.id%>">[view game]</a>
 </li>
 <% })%>
 </ul>

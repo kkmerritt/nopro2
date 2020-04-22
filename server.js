@@ -24,16 +24,16 @@ var teamRoutes = require('./routes/teams');
 var playerRoutes = require('./routes/players');
 var gameRoutes = require('./routes/games');
 
-//-------<[ LOCAL DEVELOPMENT DATABASE ]
-// mongoose.connect("mongodb://localhost:27017/noprodb",
-// { useUnifiedTopology: true, useNewUrlParser: true});
+// -------<[ LOCAL DEVELOPMENT DATABASE ]
+mongoose.connect("mongodb://localhost:27017/noprodb",
+{ useUnifiedTopology: true, useNewUrlParser: true});
 
 //-------<[ HEROKU/MONGO DEPLOYED DATABASE ]
 
 
-mongoose.connect(process.env.DATABASE_URL,{ useUnifiedTopology: true, useNewUrlParser: true}).catch(error => console.error("mongoose.connect error: " + error));
-
-
+// mongoose.connect(process.env.DATABASE_URL,{ useUnifiedTopology: true, useNewUrlParser: true}).catch(error => console.error("mongoose.connect error: " + error));
+//
+//
 
 
 server.use(bodyParser.urlencoded({extended: true}));
@@ -74,9 +74,31 @@ server.use("/games",gameRoutes);
 
 
 //display the basic home page no login required
-server.get('/' , function(req, res){
-  res.render('index.ejs');
+
+
+
+
+server.get('/' ,
+function(req, res){
+Game.find({}, function(err, allGames){
+if(err){console.log("find all games error in index page: " + err);}
+else {
+res.render("index.ejs",{games : allGames});
+}
 });
+});
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 server.post('/login',

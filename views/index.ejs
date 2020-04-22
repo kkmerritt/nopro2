@@ -1,61 +1,145 @@
 <%- include("./partials/header") %>
-
-<h3>all the teams</h3>
-
 <div class="news"><!-- begin news -->
-  <h1>-- [NEWS] --</h1>
-  <img src="../img/summersoftball2020.jpeg" alt="">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<img src="../img/summersoftball2020.jpeg" alt="">
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 </div><!-- end news -->
 
+<hr>
+<h1>game table here</h1>
+
+<!-- sort games start  -->
+<%
+for (var i = 0;i<games.length;i++){
+for (var j = 0;j<games.length;j++){
+if ( Number(games[i].date.month) < Number(games[j].date.month) ){
+var temp = games[i];
+games[i] = games[j];
+games[j] = temp;
+}
+}
+}
+%>
+
+<%
+for (var i = 0; i<games.length; i++){
+for (var j = 0; j<games.length; j++){
+if ( Number(games[i].date.day) < Number(games[j].date.day) && Number(games[i].date.month) === Number(games[j].date.month) ){
+var temp = games[i];
+games[i] = games[j];
+games[j] = temp;
+}
+}
+}
+%>
+<!-- sort games end  -->
+
+<%
+var date = new Date();
+var currentYear = date.getFullYear();
+var currentDate = date.getDate();
+var currentWeekday = date.getDay();
+var currentNxWeek = currentDate + 7;
+var currentLstWeek = currentDate - 7;
+var currentMonth = date.getMonth()+1;
+
+var getDaysInMonth = date =>
+  new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+
+var daysThisMonth = getDaysInMonth(new Date(currentYear, date.getMonth()));
+
+var gameCount = 0;
+%>
+
+
+<h4>
+weekday(sunday is 0):'<%= currentWeekday %>'<br>
+currentLstWeek:<%= currentLstWeek %><br>
+current nx week:<%= currentNxWeek %><br>
+currentmonth:<%= currentMonth %><br>
+days in this month: <%= daysThisMonth %>
+
+</h4>
 
 
 
-<h1>-- [THIS WEEKS MATCHES] --</h1>
-<div class="matchup"><!-- begin matchups -->
+<br>
+<% games.forEach(function(game){%>
+
+  <!-- if the game is on the same month then look for any game dates for the
+  rest of the month-->
+
+<% if (Number(game.date.month) === currentMonth){%>
+<%  for (var i = currentDate; i <= daysThisMonth; i++){%>
+<%  if (Number(game.date.day) === i && Number(game.date.day) <= currentNxWeek ){%>
+<%=game.date%>
+<br>
+<%}%>
+<%}%>
+<%}%>
 
 
+<!-- if days in this month - the current date = less than a week then check for early games next month-->
+<% if (daysThisMonth - currentDate < 7){ %>
+<% var nxMonth = currentMonth + 1; %>
+<% var daysLeft = daysThisMonth - currentDate; %>
 
-<div class="box">
-  <img src="../img/leopard.png" alt="">
-</div>
-
-<div class="vsbox">
-  <h3>Vs.</h3>
-</div>
-
-  <div class="box">
-    <img src="../img/dingo.png" alt="">
-</div>
-
-<div class="box">
-  <img src="../img/bee.png" alt="">
-</div>
-
-<div class="vsbox">
-  <h3>Vs.</h3>
-</div>
-
-  <div class="box">
-    <img src="../img/wolf.png" alt="">
-</div>
-<div class="box">
-  <img src="../img/leopard.png" alt="">
-</div>
-
-<div class="vsbox">
-  <h3>Vs.</h3>
-</div>
-
-  <div class="box">
-    <img src="../img/dingo.png" alt="">
-</div>
+<% for (var i = 1; i <= daysLeft; i++){ %>
+<% if ( Number(game.date.month) === nxMonth){ %>
+<% if ( Number(game.date.day) === i) { %>
+<%= game.date %>
+<% } %>
+<% } %>
+<% } %>
+<% } %>
 
 
-</div><!-- end matchups -->
+<%})%>
+<br>
 
-<h1>-- [CALENDAR] --</h1>
-<iframe src="https://calendar.google.com/calendar/b/2/embed?height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=America%2FNew_York&amp;src=bm9wcm9zcG9ydHMub3JnXzYxMmI3NzE0dGs4cHQwNXVianViazhzbGZnQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&amp;src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%237CB342&amp;color=%237986CB&amp;showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+
+<h2>This Weeks Games</h2>
+
+<table>
+<tr>
+<th id="hometeam">Home Team</th>
+<th><%= games[0].away %></th>
+<th>Date</th>
+<th>Field</th>
+<th>Time</th>
+</tr>
+
+<tr>
+<td>Wolves</td>
+<td>Bengals</td>
+<td>Jan 3rd</td>
+<td>Field 2</td>
+<td>630</td>
+</tr>
+
+<tr>
+<td>Wolves</td>
+<td>Bengals</td>
+<td>Jan 3rd</td>
+<td>Field 2</td>
+<td>630</td>
+</tr>
+<tr>
+<td>Wolves</td>
+<td>Bengals</td>
+<td>Jan 3rd</td>
+<td>Field 2</td>
+<td>630</td>
+</tr>
+<tr>
+<td>Wolves</td>
+<td>Bengals</td>
+<td>Jan 3rd</td>
+<td>Field 2</td>
+<td>630</td>
+</tr>
+</table>
+<br>
+
 
 
 <%- include("./partials/footer.ejs") %>

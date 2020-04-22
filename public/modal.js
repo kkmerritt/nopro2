@@ -1,4 +1,4 @@
-console.log("connected to main.js as well")
+console.log("modal.js connected")
 
 
 // Get the modal

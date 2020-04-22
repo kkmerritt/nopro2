@@ -1,0 +1,82 @@
+<%- include("../partials/header") %>
+<br>
+<br>
+
+<h2>this is the admin add player portal</h2>
+<h3>newplayer.ejs</h3>
+<% if(currentUser){ %>
+  <h5><%= currentUser %></h5>
+
+  <form class="" action="/players/<%=currentUser.id%>?_method=PUT" method="post" >
+    <div class="inline field">
+      <label><%= currentUser.username %></label>
+      <input type="text" name="username" value="<%= currentUser.username %>" readonly>
+
+    </div>
+
+    <div class="">
+      <label>Player First Name</label>
+      <input type="text" name="firstname" value="<%= currentUser.firstname %>">
+    </div>
+
+    <div class="">
+      <label>Player Last Name</label>
+      <input type="text" name="lastname" value="<%= currentUser.lastname %>">
+    </div>
+    <div class="">
+      <label>Gender</label>
+      <select class="" name='gender'>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+    </div>
+
+    <div class="">
+      <label>Player Image</label>
+      <input type="text" name="image" value="<%= currentUser.image %>">
+    </div>
+
+    <% if(currentUser.isCaptain){ %>
+      <p>you have captain status</p>
+    <% } else { %>
+    <div class="">
+      <label>Captain Access?</label>
+      <input type="text" name="captaincode" placeholder="False">
+    </div>
+    <%}%>
+
+    <% if(currentUser.isAdmin){ %>
+      <p>you have admin access</p>
+      <% } else { %>
+    <div class="">
+      <label>Admin Access</label>
+      <input type="text" name="admincode" placeholder="False">
+    </div>
+    <%}%>
+
+    <div class="">
+      <label>Teams</label>
+      <select class="" name='team'>
+        <option name="Free Agent">Free Agent</option>
+        <% teams.forEach(function(team){ %>
+          <option name="<%=team.name%>"><%= team.name %></option>
+          <% }) %>
+        </select>
+      </div>
+
+      <button class="" type="submit">Submit</button>
+
+    </form>
+
+<% } else { %>
+<h1>no current user logged in</h1>
+<h5>please return to the initialize email section</h5>
+<a href="/init">Initialize Email</a>
+<%}%>
+
+
+
+
+
+
+<%- include("../partials/footer") %>

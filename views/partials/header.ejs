@@ -13,34 +13,42 @@
 <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/main.css">
 <link rel="stylesheet" href="/modal.css">
-<script src="https://kit.fontawesome.com/4226c8fe0b.js" crossorigin="anonymous"></script>
+
+
 <link rel="icon" type="image/png" href="img/np_favicon.ico">
 </head>
+
+
+
+
+
 
 <body>
 
 <div id="navbar">
-  <div id="logo"><img src="/img/nopro_logo.gif" alt=""></div>
+  <div id="logo">
+    <img src="/img/nopro_logo.gif" alt="">
+  </div>
 <div id="userIn">
 
 
   <% if(currentUser){ %>
 <br>
-   <img src="<%=currentUser.image%>" height="50" width="50">
+   <img src="<%=currentUser.image%>" height="50" width="50">  <br>
    <br>
   <a href="/players/<%=currentUser.id%>">
     <%=currentUser.firstname %> <%= currentUser.lastname %>
+  </a>
 
-  </a><br>
-
+  <br>
   <% } else { %>
-    No Current User Logged in.
+    <br>
+    <img src="https://previews.123rf.com/images/chromaco/chromaco1204/chromaco120400013/13092107-cartoon-fastpitch-softball-with-screaming-face.jpg" height="50" width="50">  <br>
+
+    Please Login
   <%}%>
 </div>
-
 </div>
-
-
 
 <div id="sidebar">
 

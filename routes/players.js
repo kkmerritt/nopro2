@@ -18,20 +18,19 @@ router.get('/' , function(req, res){
  });
 });
 
-//player new form DELETE THIS DELETE THIS
-// router.get('/new' , function(req, res){
-//   Team.find({}, function(err, allTeams){
-//     if(err){
-//         console.log("new player form render error: " + err);
-//     } else {
-//       // just use the signup on the / root
-//       // res.render('players/newplayer.ejs',{teams : allTeams} );
-//       res.send('fix this to go to the signup screen')
-//     }
-// });
-// });
+// KEVIN THIS IS CURRENT PROJECT
+router.get('/new' , function(req, res){
+  Team.find({}, function(err, allTeams){
+    if(err){
+        console.log("new player form render error: " + err);
+    } else {
+      // just use the signup on the / root
+      res.render('players/newplayer.ejs',{teams : allTeams} );
+    }
+});
+});
 
-//player post creation
+// KEVIN THIS IS CURRENT PROJECT
 router.post('/' , function(req, res){
   console.log('player creation route [player] accessed: req.body:'+JSON.stringify(req.body));
   if (req.body.admincode === "admin") {req.body.isAdmin = true;}
@@ -76,7 +75,7 @@ function(req, res){
       Team.find({}, function(err, allTeams){
         if(err){console.log("allteams find error in the editplayer rt: " + err);
         } else {
-          res.render('signup.ejs',{teams : allTeams, player : foundPlayer});
+          res.render('players/editplayer.ejs',{teams : allTeams, player : foundPlayer});
 
           // res.render('players/editplayer.ejs',{teams : allTeams, player : foundPlayer});
         }

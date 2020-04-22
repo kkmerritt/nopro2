@@ -49,7 +49,10 @@ res.redirect("games/" + newGame._id);
 //------[show 1 game]
 router.get('/:id' ,
 function(req, res){
+  console.log(req.params.id)
 Game.findById(req.params.id, function(err, foundGame){
+
+  //work work work
 if(err){console.log("single game show page error: " + err);}
 
 Team.findOne({name: foundGame.home}, function(err, foundHomeTeam){
