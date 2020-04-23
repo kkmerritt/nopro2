@@ -36,8 +36,8 @@ games[j] = temp;
 <%
 var date = new Date();
 var currentYear = date.getFullYear();
-var currentDate = date.getDate();
-var currentWeekday = date.getDay();
+var currentDate = 3;//date.getDate();
+// var currentWeekday = date.getDay();
 var currentNxWeek = currentDate + 7;
 var currentLstWeek = currentDate - 7;
 var currentMonth = date.getMonth()+1;
@@ -46,27 +46,52 @@ var getDaysInMonth = date =>
   new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
 
 var daysThisMonth = getDaysInMonth(new Date(currentYear, date.getMonth()));
+var daysLastMonth = getDaysInMonth(new Date(currentYear, date.getMonth()-1));
 
-var gameCount = 0;
+if (currentLstWeek < 1){currentLstWeek = parseInt(daysLastMonth) + parseInt(currentLstWeek);}
 %>
 
 
 <h4>
-weekday(sunday is 0):'<%= currentWeekday %>'<br>
+currentDate is set to: <%= currentDate %><br>
 currentLstWeek:<%= currentLstWeek %><br>
 current nx week:<%= currentNxWeek %><br>
-currentmonth:<%= currentMonth %><br>
-days in this month: <%= daysThisMonth %>
-
+currentmonth #:<%= currentMonth %><br>
+days in this month: <%= daysThisMonth %><br>
+days in last month: <%= daysLastMonth %>
 </h4>
-
-
-
 <br>
-<% games.forEach(function(game){%>
 
-  <!-- if the game is on the same month then look for any game dates for the
-  rest of the month-->
+
+
+<% games.forEach(function(game){%>
+  <!-- if the game is on the same month then look for any game dates from the previous week-->
+  <% if (Number(game.date.month) === currentMonth){%>
+  <%  for (var i = currentDate-7; i <= daysThisMonth; i++){%>
+  <%  if (Number(game.date.day) === i && Number(game.date.day) <= currentDate ){%>
+    <p>last week:<%=game.date%> </p>
+  <%}%>
+  <%}%>
+  <%}%>
+
+  <!-- if the game is early in the month check if there were games late in the previous month-->
+  <% if (currentDate <= 7){ %>
+  <% var prvMonth = currentMonth - 1; %>
+  <% var daysRemain = 7 - currentDate; %>
+  <% var x = parseInt(daysLastMonth) - parseInt(daysRemain); %>
+  <% for (var i = x; i <= daysLastMonth; i++){ %>
+  <% if ( Number(game.date.month) === prvMonth){ %>
+  <% if ( Number(game.date.day) === i) { %>
+    <p>last week:<%=game.date%> </p>
+  <% } %>
+  <% } %>
+  <% } %>
+  <% } %>
+
+
+
+  <!-- if the game is on the current month then look for any game dates for the
+  rest of the that week-->
 
 <% if (Number(game.date.month) === currentMonth){%>
 <%  for (var i = currentDate; i <= daysThisMonth; i++){%>
@@ -77,8 +102,7 @@ days in this month: <%= daysThisMonth %>
 <%}%>
 <%}%>
 
-
-<!-- if days in this month - the current date = less than a week then check for early games next month-->
+<!-- if days in this month minus the current date equals less than a week then check for early games next month-->
 <% if (daysThisMonth - currentDate < 7){ %>
 <% var nxMonth = currentMonth + 1; %>
 <% var daysLeft = daysThisMonth - currentDate; %>
@@ -91,7 +115,6 @@ days in this month: <%= daysThisMonth %>
 <% } %>
 <% } %>
 <% } %>
-
 
 <%})%>
 <br>
