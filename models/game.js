@@ -12,6 +12,8 @@ var gameSchema = new mongoose.Schema({
   // teams: [{type:mongoose.Schema.Types.ObjectId, ref: "Team"}]
   home: String,
   away: String,
+  homescore: Number,
+  awayscore: Number,
 });
 
 var Game = mongoose.model("Game", gameSchema);

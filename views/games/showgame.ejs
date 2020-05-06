@@ -2,15 +2,17 @@
 
 <h1>show game page</h1>
 
-<h4>home team: <a href="/teams/<%= home.id %>"><%= home.name %></a></h4>
-<h4>away team: <a href="/teams/<%= away.id %>"><%= away.name %></a></h4>
+<h4>home team: <a href="/teams/<%= home.id %>"><%= home.name %></a>
+away team: <a href="/teams/<%= away.id %>"><%= away.name %></a></h4>
 
 <h4>
-MONTH : <%= game.date.month %> -
+MONTH : <%= monthConvert(Number(game.date.month)) %> -
 DATE : <%= game.date.day %> -
 TIME : <%= game.date.time %> -
 </h4>
-
+<hr>
+<h5><%=game%></h5>
+<hr>
 
 <h4>Field : <%= game.field %></h4>
 <a href="/games">Return to All Games</a>
@@ -22,4 +24,5 @@ TIME : <%= game.date.time %> -
 <form action="/games/<%=game.id%>?_method=DELETE" method="post">
   <button type="submit">DELETE THIS GAME</button>
 </form>
+
 <%- include("../partials/footer") %>

@@ -8,7 +8,7 @@ var passport = require('passport');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var methodOverride = require('method-override');
-var middleware = require('./middleware');
+// var middleware = require('./middleware');
 var async = require("async");
 var nodemailer = require("nodemailer");
 var crypto = require("crypto");
@@ -65,6 +65,22 @@ server.use(function(req, res, next){
     res.locals.success = req.flash('success');
    next();
 });
+
+server.locals.monthConvert = function(month){
+  if (month === 1){month = 'January';}
+  if (month === 2){month = 'February';}
+  if (month === 3){month = 'March';}
+  if (month === 4){month = 'April';}
+  if (month === 5){month = 'May';}
+  if (month === 6){month = 'June';}
+  if (month === 7){month = 'July';}
+  if (month === 8){month = 'August';}
+  if (month === 9){month = 'September';}
+  if (month === 10){month = 'October';}
+  if (month === 11){month = 'November';}
+  if (month === 12){month = 'December';}
+  return month;
+}
 
 
 server.use("/teams",teamRoutes);

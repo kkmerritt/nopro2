@@ -12,18 +12,20 @@ please enter the new game information:</h3>
 
   <label>NEW MONTH of GAME:</label>
   <select name="date[month]">
-    <option value="January">January</option>
-    <option value="February">February</option>
-    <option value="March">March</option>
-    <option value="April">April</option>
-    <option value="May">May</option>
-    <option value="June">June</option>
-    <option value="July">July</option>
-    <option value="August">August</option>
-    <option value="September">September</option>
-    <option value="October">October</option>
-    <option value="November">November</option>
-    <option value="December">December</option>
+    <option value="<%=game.date.month%>"><%=game.date.month%></option>
+
+    <option value="1">January</option>
+    <option value="2">February</option>
+    <option value="3">March</option>
+    <option value="4">April</option>
+    <option value="5">May</option>
+    <option value="6">June</option>
+    <option value="7">July</option>
+    <option value="8">August</option>
+    <option value="9">September</option>
+    <option value="10">October</option>
+    <option value="11">November</option>
+    <option value="12">December</option>
   </select><br>
 
   <label>NEW DAY of GAME:</label>
@@ -63,10 +65,10 @@ please enter the new game information:</h3>
 
   <label>NEW TIME of GAME:</label>
   <select name="date[time]">
-    <option value="6:15pm">January</option>
-    <option value="6:30pm">February</option>
-    <option value="7:30pm">March</option>
-    <option value="9:00pm">March</option>
+    <option value="6:15pm">6:15pm</option>
+    <option value="6:30pm">6:30pm</option>
+    <option value="7:30pm">7:30pm</option>
+    <option value="9:00pm">9:00pm</option>
   </select><br><br>
 
   <label>PREVIOUS FIELD: <%=game.field%></label><br>
@@ -94,12 +96,29 @@ please enter the new game information:</h3>
       <% teams.forEach(function(team){ %>
         <option value="<%=team.name%>"><%=team.name%></option>
         <% }); %>
-      </select><br>
+      </select>
 
-<br><br><br>
+<br>
+<br>
+<br>
+<p>score input IF game is after<br> <%=Date()%></p>
+
+
+<label for="quantity">Home Score (between 0 and 50):</label>
+<input type="number"  name="homescore" min="1" max="50"><br>
+<label for="quantity">Away Score (between 0 and 50):</label>
+
+<input type="number"  name="awayscore" min="1" max="50">
+
+
+
+
+<br>
       <button type="submit">Save This EDITED Game</button>
 
     </form>
+
+    <!-- delete this game form -->
     <form action="/games/<%=game.id%>?_method=DELETE" method="post">
       <button type="submit">DELETE THIS GAME</button>
     </form>

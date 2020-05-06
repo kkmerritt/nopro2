@@ -36,7 +36,7 @@ games[j] = temp;
 <%
 var date = new Date();
 var currentYear = date.getFullYear();
-var currentDate = 30  // date.getDate();
+var currentDate = date.getDate();
 // var currentWeekday = date.getDay();
 var currentNxWeek = currentDate + 7;
 
@@ -138,49 +138,6 @@ days in last month: <%= daysLastMonth %>
 
 <h1>this week games:</h1>
 <%=thisWeekGames%>
-
-<h2>This Weeks Games</h2>
-
-<table>
-<tr>
-<th id="hometeam">Home Team</th>
-<th><%= games[0].away %></th>
-<th>Date</th>
-<th>Field</th>
-<th>Time</th>
-</tr>
-
-<tr>
-<td>Wolves</td>
-<td>Bengals</td>
-<td>Jan 3rd</td>
-<td>Field 2</td>
-<td>630</td>
-</tr>
-
-<tr>
-<td>Wolves</td>
-<td>Bengals</td>
-<td>Jan 3rd</td>
-<td>Field 2</td>
-<td>630</td>
-</tr>
-<tr>
-<td>Wolves</td>
-<td>Bengals</td>
-<td>Jan 3rd</td>
-<td>Field 2</td>
-<td>630</td>
-</tr>
-<tr>
-<td>Wolves</td>
-<td>Bengals</td>
-<td>Jan 3rd</td>
-<td>Field 2</td>
-<td>630</td>
-</tr>
-</table>
-<br>
 
 
 

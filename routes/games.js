@@ -92,7 +92,9 @@ var editGame = {
 date: req.body.date,
 field: req.body.field,
 home: req.body.home,
-away: req.body.away
+away: req.body.away,
+homescore: req.body.homescore,
+awayscore: req.body.awayscore
 }
 Game.findByIdAndUpdate(req.params.id, editGame,
 function(err, foundGame){
