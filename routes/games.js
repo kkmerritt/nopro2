@@ -88,23 +88,58 @@ res.render('games/editgame.ejs', {teams : allTeams, game: foundGame});
 //------[edit 1 game]
 router.put('/:id',
 function(req, res){
-var editGame = {
-date: req.body.date,
-field: req.body.field,
-home: req.body.home,
-away: req.body.away,
-homescore: req.body.homescore,
-awayscore: req.body.awayscore
+
+
+  var editGame = {
+    date: req.body.date,
+    field: req.body.field,
+    home: req.body.home,
+    away: req.body.away,
+    homescore: req.body.homescore,
+    awayscore: req.body.awayscore
+  }
+
+if (editGame.homescore>editGame.awayscore){
+  Team.findOneAndUpdate({name: editGame.home}, {$inc: {"record.w":1} }, function(err, result){
+    if (!err) {console.log("+1 win to: "+ result)}
+  })
+  Team.findOneAndUpdate({name: editGame.away}, {$inc: {"record.l":1} }, function(err, result){
+    if (!err) {console.log("+1 win to: "+ result)}
+  })
 }
-Game.findByIdAndUpdate(req.params.id, editGame,
-function(err, foundGame){
-if (err){console.log("error in updating a game: "+err);}
-else {
-console.log('this game has been updated: '+ foundGame)
-res.redirect('/games/'+foundGame.id);
+
+if (editGame.homescore<editGame.awayscore){
+  Team.findOneAndUpdate({name: editGame.home}, {$inc: {"record.l":1} }, function(err, result){
+    if (!err) {console.log("+1 win to: "+ result)}
+  })
+  Team.findOneAndUpdate({name: editGame.away}, {$inc: {"record.w":1} }, function(err, result){
+    if (!err) {console.log("+1 win to: "+ result)}
+  })
 }
-})
-});
+
+
+if (editGame.homescore === editGame.awayscore){
+  Team.findOneAndUpdate({name: editGame.home}, {$inc: {"record.t":1} }, function(err, result){
+    if (!err) {console.log("+1 win to: "+ result)}
+  })
+  Team.findOneAndUpdate({name: editGame.away}, {$inc: {"record.t":1} }, function(err, result){
+    if (!err) {console.log("+1 win to: "+ result)}
+  })
+}
+
+  Game.findByIdAndUpdate(req.params.id, editGame,
+    function(err, foundGame){
+      if (err){console.log("error in updating a game: "+err);}
+      else {
+        // console.log('this game has been updated: '+ foundGame)
+        res.redirect('/games/'+foundGame.id);
+      }
+    })
+
+
+  });
+
+
 
 //------[delete game]
 router.delete('/:id',
@@ -121,6 +156,6 @@ res.redirect('/games');
 
 router.get('*', function(req,res){
 res.redirect('/games');
-console.log("hit the * route in games");
+// console.log("hit the * route in games");
 })
 module.exports = router;

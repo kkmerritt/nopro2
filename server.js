@@ -7,6 +7,8 @@ var session = require('express-session');
 var passport = require('passport');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+mongoose.set('useFindAndModify', false);
+
 var methodOverride = require('method-override');
 // var middleware = require('./middleware');
 var async = require("async");
@@ -97,12 +99,12 @@ server.use("/games",gameRoutes);
 server.get('/' ,
 function(req, res){
 Game.find({}, function(err, allGames){
-if(err){console.log("find all games error in index page: " + err);}
-else {
-res.render("index.ejs",{games : allGames});
+Team.find({}, function(err, allTeams){
+  res.render("index.ejs",{games : allGames, teams : allTeams});
+})
+});
 }
-});
-});
+);
 
 
 

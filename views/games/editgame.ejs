@@ -1,18 +1,17 @@
 <%- include("../partials/header") %>
 
-
 <h4>you are about to edit this game:</h4>
-<h4><%= game %> </h4>
+<h5><%= game %> </h5>
 
 <h3>
 please enter the new game information:</h3>
 <form class="" action="/games/<%=game.id%>?_method=PUT" method="post">
   <label>PREVIOUS DATE:</label>
-  <label><%=game.date.month%> <%=game.date.day%> <%=game.date.time%></label><br><br><br>
+  <label><%=monthConvert(Number(game.date.month))%> <%=game.date.day%>, @ <%=game.date.time%></label><br><br><br>
 
   <label>NEW MONTH of GAME:</label>
   <select name="date[month]">
-    <option value="<%=game.date.month%>"><%=game.date.month%></option>
+    <option value="<%=game.date.month%>"><%=monthConvert(Number(game.date.month))%></option>
 
     <option value="1">January</option>
     <option value="2">February</option>
@@ -30,6 +29,8 @@ please enter the new game information:</h3>
 
   <label>NEW DAY of GAME:</label>
   <select name="date[day]">
+    <option value="<%=game.date.day%>"><%=game.date.day%></option>
+
     <option value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>
@@ -65,6 +66,8 @@ please enter the new game information:</h3>
 
   <label>NEW TIME of GAME:</label>
   <select name="date[time]">
+    <option value="<%=game.date.time%>"><%=game.date.time%></option>
+
     <option value="6:15pm">6:15pm</option>
     <option value="6:30pm">6:30pm</option>
     <option value="7:30pm">7:30pm</option>
@@ -74,6 +77,8 @@ please enter the new game information:</h3>
   <label>PREVIOUS FIELD: <%=game.field%></label><br>
   <label>NEW FIELD:</label>
   <select name="field">
+    <option value="<%=game.field%>"><%=game.field%></option>
+
     <option value="Field One">Field One</option>
     <option value="Field One">Field Two</option>
     <option value="Field One">Field Three</option>
@@ -83,6 +88,8 @@ please enter the new game information:</h3>
   <label><%=game.home%></label><br>
   <label>NEW HOME TEAM:</label>
   <select name="home" value="Home Team">
+    <option value="<%=game.home%>"><%=game.home%></option>
+<hr>
     <% teams.forEach(function(team){ %>
       <option value="<%=team.name%>"><%=team.name%></option>
       <% }); %>
@@ -93,6 +100,8 @@ please enter the new game information:</h3>
     <label><%=game.away%></label><br>
     <label>NEW AWAY TEAM:</label>
     <select name="away" value="Home Team">
+      <option value="<%=game.away%>"><%=game.away%></option>
+
       <% teams.forEach(function(team){ %>
         <option value="<%=team.name%>"><%=team.name%></option>
         <% }); %>
@@ -105,10 +114,10 @@ please enter the new game information:</h3>
 
 
 <label for="quantity">Home Score (between 0 and 50):</label>
-<input type="number"  name="homescore" min="1" max="50"><br>
+<input type="number"  name="homescore" value="<%=game.homescore%>" min="1" max="50"><br>
 <label for="quantity">Away Score (between 0 and 50):</label>
 
-<input type="number"  name="awayscore" min="1" max="50">
+<input type="number"  name="awayscore" value="<%=game.awayscore%>" min="1" max="50">
 
 
 

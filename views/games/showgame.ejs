@@ -2,8 +2,11 @@
 
 <h1>show game page</h1>
 
-<h4>home team: <a href="/teams/<%= home.id %>"><%= home.name %></a>
-away team: <a href="/teams/<%= away.id %>"><%= away.name %></a></h4>
+<img src="<%= home.image %>" width="100px">
+<a href="/teams/<%= home.id %>"><%= home.name %></a>
+<p>vs</p>
+  <img src="<%= away.image %>" width="100px">
+<a href="/teams/<%= away.id %>"><%= away.name %></a>
 
 <h4>
 MONTH : <%= monthConvert(Number(game.date.month)) %> -

@@ -1,8 +1,21 @@
 <%- include("./partials/header") %>
-<div class="news"><!-- begin news -->
+
+<!-- begin news -->
+<div class="news">
 <img src="../img/summersoftball2020.jpeg" alt="">
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-</div><!-- end news -->
+</div>
+<!-- end news -->
+
+<!-- begin twitter / api -->
+
+<!-- <h3>
+<a class="twitter-timeline" data-width="220" data-height="500" data-theme="light" href="https://twitter.com/NoProSports?ref_src=twsrc%5Etfw">Tweets by NoProSports</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<a href="https://twitter.com/noprosports?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="true">Follow @noprosports</a>
+</h3> -->
+
+<!-- end twitter / api -->
 
 <hr>
 <h1>game table here</h1>
@@ -10,25 +23,25 @@
 <!-- sort games start  -->
 <%
 for (var i = 0;i<games.length;i++){
-for (var j = 0;j<games.length;j++){
-if ( Number(games[i].date.month) < Number(games[j].date.month) ){
-var temp = games[i];
-games[i] = games[j];
-games[j] = temp;
-}
-}
+  for (var j = 0;j<games.length;j++){
+    if ( Number(games[i].date.month) < Number(games[j].date.month) ){
+      var temp = games[i];
+      games[i] = games[j];
+      games[j] = temp;
+    }
+  }
 }
 %>
 
 <%
 for (var i = 0; i<games.length; i++){
-for (var j = 0; j<games.length; j++){
-if ( Number(games[i].date.day) < Number(games[j].date.day) && Number(games[i].date.month) === Number(games[j].date.month) ){
-var temp = games[i];
-games[i] = games[j];
-games[j] = temp;
-}
-}
+  for (var j = 0; j<games.length; j++){
+    if ( Number(games[i].date.day) < Number(games[j].date.day) && Number(games[i].date.month) === Number(games[j].date.month) ){
+      var temp = games[i];
+      games[i] = games[j];
+      games[j] = temp;
+    }
+  }
 }
 %>
 <!-- sort games end  -->
@@ -37,16 +50,11 @@ games[j] = temp;
 var date = new Date();
 var currentYear = date.getFullYear();
 var currentDate = date.getDate();
-// var currentWeekday = date.getDay();
 var currentNxWeek = currentDate + 7;
-
 var currentLstWeek = currentDate - 7;
-
 var currentMonth = date.getMonth()+1;
-
 var getDaysInMonth = date =>
-  new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-
+new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
 var daysThisMonth = getDaysInMonth(new Date(currentYear, date.getMonth()));
 var daysLastMonth = getDaysInMonth(new Date(currentYear, date.getMonth()-1));
 var daysNxMonth = getDaysInMonth(new Date(currentYear, date.getMonth()+1));
@@ -58,87 +66,101 @@ var thisWeekGames = [];
 var lastWeekGames = [];
 %>
 
-
-<h4>
-currentDate is set to: <%= currentDate %><br>
-currentLstWeek:<%= currentLstWeek %><br>
-current nx week:<%= currentNxWeek %><br>
-currentmonth #:<%= currentMonth %><br>
-days in this month: <%= daysThisMonth %><br>
-days in last month: <%= daysLastMonth %>
-</h4>
 <br>
 
 
+<% games.forEach(function(game){ %>
 
-<% games.forEach(function(game){%>
+<!-- if the game is on the same month then look for any game dates from the previous week-->
+<% if (Number(game.date.month) === currentMonth){ %>
+  <% if (currentLstWeek < 1){currentLstWeek = 1} %>
+  <% for (var i = currentLstWeek; i <= currentDate-1; i++){ %>
+    <% if (Number(game.date.day) === i && Number(game.date.day) <= currentDate ){ %>
+      <p> <%= game.date %> </p>
+      <% lastWeekGames.push(game) %>
+      <% } %>
+    <% } %>
+<% } %>
 
-  <!-- if the game is on the same month then look for any game dates from the previous week-->
-  <% if (Number(game.date.month) === currentMonth){%>
-    <% if (currentLstWeek < 1){currentLstWeek = 1} %>
-  <%  for (var i = currentLstWeek; i <= currentDate-1; i++){%>
-  <%  if (Number(game.date.day) === i && Number(game.date.day) <= currentDate ){%>
-    <p><%=game.date%> </p>
-    <% lastWeekGames.push(game) %>
-  <%}%>
-  <%}%>
-  <%}%>
-
-  <!-- if the game is before the 7th there may have been
-  games late in the previous month-->
-  <% if (currentDate <= 7){ %>
+<!-- if the game is before the 7th there may have been
+games late in the previous month-->
+<% if (currentDate <= 7){ %>
   <% var prvMonth = currentMonth - 1; %>
   <% var daysRemain = 7 - currentDate; %>
   <% var x = parseInt(daysLastMonth) - parseInt(daysRemain); %>
   <% for (var i = x; i <= daysLastMonth; i++){ %>
-  <% if ( Number(game.date.month) === prvMonth){ %>
-  <% if ( Number(game.date.day) === i) { %>
-    <p><%=game.date%> </p>
-    <% lastWeekGames.push(game) %>
+    <% if ( Number(game.date.month) === prvMonth){ %>
+      <% if ( Number(game.date.day) === i) { %>
+        <p><%=game.date%> </p>
+        <% lastWeekGames.push(game) %>
+      <% } %>
+    <% } %>
   <% } %>
+<% } %>
+
+<!-- if the game month is on the current month then look for any game dates for the
+rest of the that week during that month-->
+
+<% if (Number(game.date.month) === currentMonth){ %>
+  <% for (var i = currentDate; i <= daysThisMonth; i++){ %>
+    <% if (Number(game.date.day) === i && Number(game.date.day) <= currentNxWeek ){ %>
+      <%= game.date %>
+      <% thisWeekGames.push(game) %>
+      <br>
+    <% } %>
   <% } %>
-  <% } %>
-  <% } %>
-
-
-
-  <!-- if the game month is on the current month then look for any game dates for the
-  rest of the that week during that month-->
-
-<% if (Number(game.date.month) === currentMonth){%>
-<%  for (var i = currentDate; i <= daysThisMonth; i++){%>
-<%  if (Number(game.date.day) === i && Number(game.date.day) <= currentNxWeek ){%>
-<%=game.date%>
-<% thisWeekGames.push(game) %>
-<br>
-<%}%>
-<%}%>
-<%}%>
+<% } %>
 
 <!-- if current day + 7 goes over current month-->
 <!-- iterate to next month and search for x days into that month-->
 <% if (currentNxWeek > daysThisMonth){ %>
-<% var nxMonth = currentMonth + 1; %>
-<% var searchDays = currentNxWeek - daysThisMonth; %>
-<% for (var i = 1; i <= searchDays; i++){ %>
-<% if ( Number(game.date.month) === nxMonth){ %>
-<% if ( Number(game.date.day) === i) { %>
-<%= game.date %>
-<% thisWeekGames.push(game) %>
-<% } %>
-<% } %>
-<% } %>
+  <% var nxMonth = currentMonth + 1; %>
+  <% var searchDays = currentNxWeek - daysThisMonth; %>
+  <% for (var i = 1; i <= searchDays; i++){ %>
+    <% if ( Number(game.date.month) === nxMonth){ %>
+      <% if ( Number(game.date.day) === i) { %>
+        <%= game.date %>
+        <% thisWeekGames.push(game) %>
+      <% } %>
+    <% } %>
+  <% } %>
 <% } %>
 
+<% }) %>
 
-<%})%>
 <br>
 <h1>last week games:</h1>
-<%=lastWeekGames%>
+<%= lastWeekGames %>
 
 <h1>this week games:</h1>
-<%=thisWeekGames%>
+<%= thisWeekGames %>
+<br>
+<br>
+<br>
+<hr>
+<!-- END THISWEEK GAMES SECTION-->
 
 
+<!-- BEGIN STANDINGS SECTION-->
+<h2>standings</h2>
+<h3>
+</h3>
+
+<% teams.forEach(function(team){ %>
+  name:<strong> <%= team.name %> </strong>
+
+wins <%= team.w %>
+losses <%= team.l %>
+pct <%= team.pct %>
+ps <%= team.ps %>
+psa <%= team.psa %>
+<br>
+<% }) %>
+
+
+
+
+
+<!-- END STANDINGS SECTION-->
 
 <%- include("./partials/footer.ejs") %>
