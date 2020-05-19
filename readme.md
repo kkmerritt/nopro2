@@ -15,7 +15,6 @@ drinking: CuP on Norman Coffee, Bells Two-Hearted Ale, Sorrow.
 eating: marshmallows from swiss miss hot cocoa packets.
 
 # CREDITS:
-[Semantic UI](https://semantic-ui.com//)
 [ya-webdesign](https://ya-webdesign.com/)
 [fontawesome](https://fontawesome.com/)
 calendar? https://github.com/TomSpencerLondon/Calendar
