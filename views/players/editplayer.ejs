@@ -26,13 +26,27 @@
       <label>Teams</label>
       <select class="" name='team'>
         <% teams.forEach(function(team){ %>
-
           <option name="<%=team.name%>"><%= team.name %></option>
-
         <% }) %>
-
       </select>
     </div>
+
+
+    <div class="">
+      <label>Captain Password</label>
+      <input type="text" name="captaincode" value="<%= player.isCaptain %>" readonly >
+    </div>
+    <div class="">
+      <label>Admin Password</label>
+      <input type="text" name="admincode" value="<%= player.isAdmin %>" readonly>
+    </div>
+
+
+
+
+
+
+
 
   <button class="ui button" type="submit">Submit</button>
 </form>

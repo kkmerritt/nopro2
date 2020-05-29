@@ -97,8 +97,9 @@ function(req, res){
     gender: req.body.gender,
     image: req.body.image,
     team: req.body.team,
-    isCaptain: req.body.isCaptain,
-    isAdmin: req.body.isAdmin,
+    // editing player screen doesn't allow to change captain? only admin can
+    // isCaptain: req.body.isCaptain,
+    // isAdmin: req.body.isAdmin,
   }
 if (req.body.playerRemove === "TRUE") {
   console.log('entered remove player from team route');

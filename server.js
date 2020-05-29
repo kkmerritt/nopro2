@@ -108,10 +108,6 @@ Team.find({}, function(err, allTeams){
 
 
 
-
-
-
-
 server.post('/login',
 passport.authenticate('local',
  { //this is being "used" in passport.use()
