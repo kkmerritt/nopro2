@@ -33,3 +33,4 @@ calendar? https://github.com/TomSpencerLondon/Calendar
 
 # FUTURE IMPROVEMENTS:
 stop crashing your machine so you don't have to keep cloning this.
+Another quick adjustment to sync git.
